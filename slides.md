@@ -33,8 +33,8 @@ kgronlund@suse.com
 
 ---
 
-### Recursive Functions of Symbolic Expressions 
-### and Their Computation by Machine, Part I
+#### Recursive Functions of Symbolic Expressions 
+#### and Their Computation by Machine, Part I
 
 ---
 
@@ -54,24 +54,75 @@ github.com/krig/LISP
 
 ---
 
-1. `Makefile`
-2. `komplott.c`
-3. `tests/lisp15.scm`
+# ?
+
+---
+
+## special forms
 
 ---
 
 ```
-.PHONY: all test clean
+(quote X) ; -> X
 
-all: komplott
+(cons X Y) ; -> (X Y)
 
-komplott: komplott.c
-	$(CC) -g -Og -Wall -Werror -std=c11 -o $@ komplott.c
+(cond (<case1> <then1>) (<case2> <then2>) ...)
 
-test: komplott tests/lisp15.scm
-	./komplott tests/lisp15.scm
+(begin EXPR...)
 
-clean:
-	rm -f ./komplott
+(or EXPR...)
+
+(define NAME EXPR)
+
+(lambda (ARG...) BODY...)
 ```
 
+---
+
+## `lisp15.scm`
+
+---
+
+```
+(define cadr (lambda (c) (car (cdr c))))
+(define cdar (lambda (c) (cdr (car c))))
+(define caar (lambda (c) (car (car c))))
+(define cddr (lambda (c) (cdr (cdr c))))
+(define caadr (lambda (c) (car (car (cdr c)))))
+(define cadar (lambda (c) (car (cdr (car c)))))
+(define caaar (lambda (c) (car (car (car c)))))
+(define caddr (lambda (c) (car (cdr (cdr c)))))
+(define cdadr (lambda (c) (cdr (car (cdr c)))))
+(define cddar (lambda (c) (cdr (cdr (car c)))))
+(define cdaar (lambda (c) (cdr (car (car c)))))
+(define cdddr (lambda (c) (cdr (cdr (cdr c)))))
+(define not (lambda (x) (cond ((null? x) #t) (#t #f))))
+(define atom? (lambda (x) (cond ((null? x) #f) ((pair? x) #f) (#t #t))))
+(define else #t)
+
+```
+
+---
+
+```
+; build assoclist from lists of keys and values
+; x = keys
+; y = values
+; a = assoclist
+(define pairlis (lambda (x y a)
+                  (cond ((null? x) a)
+                        (else (cons (cons (car x) (car y))
+                                    (pairlis (cdr x) (cdr y) a))))))
+```
+
+---
+
+```
+; find value matching key in assoclist
+; x = key
+; a = assoclist
+(define assoc (lambda (x a)
+                (cond ((equal? (caar a) x) (car a))
+                      (else (assoc x (cdr a))))))
+```

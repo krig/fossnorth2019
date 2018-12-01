@@ -134,6 +134,11 @@ body {
 	margin-left: 40px;
 }
 
+.reveal q,
+.reveal blockquote {
+	quotes: none;
+}
+
 .reveal blockquote {
 	display: block;
 	position: relative;
@@ -162,16 +167,15 @@ body {
 
 	text-align: left;
 	font-size: 0.55em;
-	font-family: monospace;
+	font-family: $monospaceFont;
 	line-height: 1.2em;
 
 	word-wrap: break-word;
 
 	box-shadow: 0px 0px 6px rgba(0,0,0,0.3);
 }
-
 .reveal code {
-	font-family: monospace;
+	font-family: $monospaceFont;
 	text-transform: none;
 }
 
@@ -276,6 +280,7 @@ body {
 	.reveal section img.plain {
 		border: 0;
 		box-shadow: none;
+		background:none;
 	}
 
 	.reveal a img {

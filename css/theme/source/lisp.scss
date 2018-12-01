@@ -1,0 +1,65 @@
+/**
+ * A simple theme for reveal.js presentations, similar
+ * to the default theme. The accent color is darkblue.
+ *
+ * This theme is Copyright (C) 2012 Owen Versteeg, https://github.com/StereotypicalApps. It is MIT licensed.
+ * reveal.js is Copyright (C) 2011-2012 Hakim El Hattab, http://hakim.se
+ */
+
+
+// Default mixins and settings -----------------
+@import "../template/mixins";
+@import "../template/settings";
+// ---------------------------------------------
+
+
+
+// Include theme-specific fonts
+@import url("/lib/font/Serif/cmun-serif.css");
+@import url("/lib/font/Typewriter/cmun-typewriter.css");
+
+// Override theme settings (see ../template/settings.scss)
+$monospaceFont: 'Computer Modern Typewriter', monospace;
+$mainFont: 'Computer Modern Typewriter', sans-serif;
+$headingFont: 'Computer Modern Typewriter', sans-serif;
+$mainColor: #DDDDDD;
+$headingColor: #DDDDDD;
+$headingTextShadow: none;
+$headingTextTransform: none;
+$backgroundColor: #262228;
+$linkColor: #01FF70;
+$linkColorHover: lighten( $linkColor, 20% );
+$selectionBackgroundColor: rgba(0, 0, 0, 0.99);
+
+section.has-dark-background {
+	&, h1, h2, h3, h4, h5, h6 {
+		color: #d2dae2;
+	}
+}
+
+
+// Theme template ------------------------------
+@import "../template/theme";
+// ---------------------------------------------
+
+
+.reveal pre {
+    box-shadow: none;
+}
+
+.reveal blockquote {
+    box-shadow: none;
+    background: none;
+}
+
+.introbox-holder {
+}
+
+.introbox-holder .introbox {
+    margin-top: 16em;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 0.66em;
+    text-align: left;
+    max-width: 70%;
+}

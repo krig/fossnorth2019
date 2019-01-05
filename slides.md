@@ -8,6 +8,13 @@ kgronlund@suse.com
 
 ---
 
+- One
+- Two <!-- .element: class="fragment" -->
+- Three <!-- .element: class="fragment" -->
+
+---
+
+
 > When I wrote the following pages, or rather the bulk of them, I
 > lived alone, in the woods, a mile from any neighbor, in a house
 > which I had built myself, on the shore of Walden Pond, in Concord,

@@ -1,3 +1,373 @@
+# Let's LISP like it's 1959
+
+This talk is going to be partly about history, partly about lisp in
+general and partly about my tiny lisp implementation - I'll get to
+that last.
+
+## Background
+
+Lisp was conceived in the late 1950's by John McCarthy who was one of
+the founders of the AI research lab at MIT together with Marvin
+Minsky, both with a background in mathematics.
+
+McCarthy was also the person who came up with the term "artificial
+intelligence", at least as far as I have been able to determine.
+
+Reading the papers they wrote about AI in the 50s is a lot of
+fun. They were absolutely convinced at that time that true human level
+reasoning was just around the corner. I have one paper by McCarthy
+from 1959 called "Programs with Common Sense" containing this mission
+statement:
+
+> Our ultimate objective is to make programs that learn from their
+> experience as effectively as humans do.
+
+I think there are some really valuable lessons to draw from the early
+days of AI, not in the least how hard it is to know where you are when
+you have very little experience to draw upon. Early on with some new
+technology, you simply don't know enough to know how little you know.
+
+Some years later, McCarthy published a paper with the following title:
+
+> HUMAN-LEVEL AI IS HARDER THAN IT SEEMED IN 1955 
+
+I have a feeling that it's harder than it seems in 2019 as well, but
+that's a different story.
+
+## Lisp
+
+The idea for a list processing programming language originally came
+from a language called IPL 2 created in 1956. The other main
+inspiration for Lisp was FORTRAN, created in 1957, a huge innovation
+at the time, being the first non-assembly language or higher level
+language.
+
+The computer used by McCarthy was an IBM 704, the first mass-produced
+computer with floating-point arithmetic hardware.
+
+https://en.wikipedia.org/wiki/File:IBM_Electronic_Data_Processing_Machine_-_GPN-2000-001881.jpg
+
+I haven't found any video of an IBM 704 in action, but I have found
+video of an IBM 1401 running a FORTRAN compiler to compile a small
+program, and it's fascinating. I don't have time to play it now but
+I've put the link in the slides.
+
+https://www.youtube.com/watch?v=uFQ3sajIdaM
+
+Here's a quote from McCarthy that's pretty great:
+
+> Representing sentences by list structure seemed appropriate - it
+> still is - and a list processing language also seemed appropriate
+> for programming the operations involved in deduction - and still
+> is.
+
+The thing to note here though is that at the time, lisp as we know it
+was not conceived as a programming language. Instead, it started as an
+exercise to simplify the Turing machine. McCarthy started thinking
+about compiling Lisp in 1958, that is turning lisp expressions into
+machine instructions, and hired an undergraduate called Steve Russell
+effectively as a human compiler. His task was to take snippets of Lisp
+code and translate them into machine code.
+
+After a couple of months, McCarthy came up with the eval function.
+
+> Another way to show that Lisp was neater than Turing machines was to
+> write a universal Lisp function and show that it is briefer and more
+> comprehensible than the description of a universal Turing
+> machine. This was the Lisp function eval..., which computes the
+> value of a Lisp expression.... Writing eval required inventing a
+> notation representing Lisp functions as Lisp data, and such a
+> notation was devised for the purposes of the paper with no thought
+> that it would be used to express Lisp programs in practice.
+
+Steve Russell then realised that if he could implement eval and then
+feed the code to that, he wouldn't have to keep hand-compiling
+things. He presented the idea to McCarthy, and here is what McCarthy
+said about that later in an interview:
+
+> Steve Russell said, look, why don't I program this eval..., and I
+> said to him, ho, ho, you're confusing theory with practice, this
+> eval is intended for reading, not for computing. But he went ahead
+> and did it. That is, he compiled the eval in my paper into [IBM] 704
+> machine code, fixing bugs, and then advertised this as a Lisp
+> interpreter, which it certainly was. So at that point Lisp had
+> essentially the form that it has today....
+
+Today, there are a few different dialects of lisp in use. Scheme, most
+commonly in the free software world known via GNU Guile, is the oldest
+of these, followed by Common Lisp which was intended to be *the*
+standard programming language but never really caught on. Next comes
+Emacs lisp as used in the emacs text editor, and finally we have
+Clojure and ClojureScript which are quite a bit newer than the others
+and runs on the JVM and in the browser.
+
+## S-expressions
+
+Okay, so Lisp is not a programming language but more like a family of
+languages or a mathematical notation for computation. But what does it
+look like?
+
+McCarthy had originally come up with a different syntax which was a
+lot more like Fortran called M-expressions, and his idea was that
+S-expressions were useful for talking about computation as a
+mathematical phenomenon while M-expressions would be what programmers
+actually used to write code.
+
+The closest thing to an implementation of that was a language called
+Dylan created by Apple in the 90s, and I'm pretty sure no one here has
+heard of it. M-expressions never made it into the implementations but
+a lot of the early documentation is written using M-expressions rather
+than S-expressions (the parentheses style of lisp that we know
+today).
+
+Parentheses. Lots of parentheses. At least that's usually the initial
+reaction that anyone has to seeing Lisp code. I'll admit that it was
+my reaction too. The first thing to say about Lisp is that trying to
+edit Lisp code without an editor which highlights matching parentheses
+for you is a nightmare. Of all the things that impress me about
+programming in the elder days, being able to write Lisp code without a
+modern editor and getting the paretheses right is the biggest one.
+
+Well, in fact it becomes clear that this WAS a big problem back
+then. There is a great quote from the Lisp 1.5 manual instructing the
+programmer to put a bunch of extra closing parentheses at the end of
+the last punch card, just in case.
+
+> To prevent reading from continuing indefinitely, each packet should
+> end with STOP followed by a large number of right parentheses. An
+> unpaired right parenthesis will cause a read error and terminate
+> reading.
+>
+> STOP )))))))))))))))))
+
+Alright, so enough history, let's get to something concrete. Here's a
+speed intro to the world of Lisps.
+
+> (a b c d)
+
+In its most basic form, Lisp has two kinds of elements: Lists and
+atoms. This is a list of four atoms, a b c and d.
+
+> ()
+
+This is an empty list.
+
+> ((a b c) (d e f))
+
+This is a list containing two sub-lists: One containing the atoms a b
+and c, and the other containing d e and f.
+
+> (f x)
+
+When representing function calls, the first element in the list is the
+name of the function to be called, and the rest are arguments to the
+call. So this is a call to the function f passing x as an argument.
+
+> (lambda (x) (* x 2))
+
+The world lambda comes from something called lambda calculus, which
+was invented by Alonzo Church in the 1930s and which McCarthy thought
+was a more convenient way of thinking about computation than the
+Turing machine by Alan Turing. So when he designed lisp, he based it
+on the lambda calculus and that's why functions are defined using the
+word lambda or the greek letter lambda. So this is a function which
+takes an argument x and multiplies it by two.
+
+> ((lambda (x) (* x 2)) 4)
+
+Here we are calling the function we just created with 4 as the
+argument, so this should return 8. Things are already getting pretty
+paretheses-y, I know. You do get used to it.
+
+That is pretty much the entire syntax of lisp. Now we get to some of
+the most primitive operations of lisp, and here different dialects
+already start to diverge.
+
+> #t
+> #f
+> (atom? x) => #t
+
+In scheme, truth is represented by hash t and hash f, while in the
+original lisp anything that wasn't nil was true while nil was
+false. McCarthy called relying on nil being false "pornographic" at
+one point, he wasn't too happy about it, so here I'm showing the
+scheme version.
+
+> (cons x y) => (x y)
+> (car (cons x y)) => x
+> (cdr (cons x y)) => y
+> (list a b c) => (a b c)
+
+Here are some basic operations for manipulating lists.
+
+# Timeline
+
+Why is lisp so fascinating? I think the reason is that Lisp is not a
+programming language at all. It is a notation for talking about
+computation with other humans more than it is a language for telling
+computers what to do. That it can also be understood by computers is a
+nothing more than a side-effect and thus nothing that we truly
+functional programmers worry much about.
+
+## Beginnings in AI
+
+> HUMAN-LEVEL AI IS HARDER THAN IT SEEMED IN 1955 
+
+Headline of document written by McCarthy in 2006.
+
+> If my 1955 hopes had been realized, human-level AI would have been
+> achieved before many (most?) of you were born.
+http://www-formal.stanford.edu/jmc/slides/wrong/wrong-sli/wrong-sli.html
+
+> He believed that we would have to know much more about how human
+> intelligence works before being able to duplicate it in machines,
+> writing that “[unfortunately we] understand human mental processes
+> only slightly better than a fish understands swimming.”
+http://ai.stanford.edu/~nilsson/John_McCarthy.pdf
+
+
+Historically, lisp IS a theoretical exercise:
+
+> Another way to show that Lisp was neater than Turing machines was to
+> write a universal Lisp function and show that it is briefer and more
+> comprehensible than the description of a universal Turing
+> machine. This was the Lisp function eval..., which computes the
+> value of a Lisp expression.... Writing eval required inventing a
+> notation representing Lisp functions as Lisp data, and such a
+> notation was devised for the purposes of the paper with no thought
+> that it would be used to express Lisp programs in practice.
+
+John McCarthy started thinking about compiling Lisp in 1958, and hired
+Steve "Slug" Russell effectively as the compiler: His first task was
+to hand-compile Lisp code. But after a couple of months, McCarthy
+came up with the eval function.
+
+Steve Russell then realised that instead of compiling the function he
+could implement eval directly and then feed the code to that, and so
+the first lisp interpreter was born.
+
+This was a big surprise at the time. Here is what McCarthy said about
+it later in an interview:
+
+> Steve Russell said, look, why don't I program this eval..., and I
+> said to him, ho, ho, you're confusing theory with practice, this
+> eval is intended for reading, not for computing. But he went ahead
+> and did it. That is, he compiled the eval in my paper into [IBM] 704
+> machine code, fixing bugs, and then advertised this as a Lisp
+> interpreter, which it certainly was. So at that point Lisp had
+> essentially the form that it has today....
+
+
+More Steve Russell quotes:
+
+> I wrote the first implemenation of a LISP interpreter on the IBM 704
+> at MIT in early in 1959. I hand-compiled John McCarthy's "Universal
+> LISP Function".
+
+CAR/CDR:
+
+> Because of an unfortunate temporary lapse of inspiration, we
+> couldn't think of any other names for the 2 pointers in a list node
+> than "address" and "decrement", so we called the functions CAR for
+> "Contents of Address of Register" and CDR for "Contents of Decrement
+> of Register".
+>
+> After several months and giving a few classes in LISP, we realized
+> that "first" and "rest" were better names, and we (John McCarthy, I
+> and some of the rest of the AI Project) tried to get people to use
+> them instead.
+>
+> Alas, it was too late! We couldn't make it stick at all. So we have
+> CAR and CDR.
+
+http://www.iwriteiam.nl/HaCAR_CDR.html
+
+# First garbage collector
+
+> At any given time only a part of the memory reserved for list
+> structures will actually be in use for storing S-expressions. The
+> remaining registers (in our system the number, initially, is
+> approximately 15,000) are arranged in a single list called the
+> free-storage list. A certain register, FREE, in the program contains
+> the location of the first register in this list. When a word is
+> required to form some additional list structure, the first word on
+> the free-storage list is taken and the number in register FREE is
+> changed to become the location of the second word on the
+> free-storage list. No provision need be made for the user to program
+> the return of registers to the free-storage list.
+
+http://blog.fogus.me/2011/11/03/in-the-shadow-of-john-mccarthy/
+
+
+David Luckham:
+
+> McCarthy was a strange fellow with many odd attitudes in human
+> relationships, one being that he would never lift a finger to help
+> any of his own people. As a result he continuously lost long serving
+> staff such as Steve Russell, Dan Edwards, and others. Those were
+> days when McCarthy was championing the idea of large central
+> computers serving hundreds of users. Even in 1969 the AI lab had a
+> direct news feed from the New York Times. And on-line text chatting
+> between users, with video support was possible. Thus the lab
+> supported the kind of Internet features we are all accustomed to
+> today.
+>
+> In the early 1970’s McCarthy seemed to become disinterested in the
+> projects of his staff, and to retire to his office and read the
+> newspapers on-line.
+
+Not only did they invent the internet, they also very quickly invented
+wasting time on the internet as well.
+
+
+# APPENDIX - HUMOROUS ANECDOTE
+
+The first on-line demonstration of LISP was also the first of a precursor of time-sharing that we called ``time-stealing''. The audience comprised the participants in one of M.I.T.'s Industrial Liaison Symposia on whom it was important to make a good impression. A Flexowriter had been connected to the IBM 704 and the operating system modified so that it collected characters from the Flexowriter in a buffer when their presence was signalled by an interrupt. Whenever a carriage return occurred, the line was given to LISP for processing. The demonstration depended on the fact that the memory of the computer had just been increased from 8192 words to 32768 words so that batches could be collected that presumed only a small memory.
+
+The demonstration was also one of the first to use closed circuit TV in order to spare the spectators the museum feet consequent on crowding around a terminal waiting for something to happen. Thus they were on the fourth floor, and I was in the first floor computer room exercising LISP and speaking into a microphone. The problem chosen was to determine whether a first order differential equation of the form was exact by testing whether , which also involved some primitive algebraic simplification.
+
+Everything was going well, if slowly, when suddenly the Flexowriter began to type (at ten characters per second)
+
+``THE GARBAGE COLLECTOR HAS BEEN CALLED. SOME INTERESTING STATISTICS ARE AS FOLLOWS:''
+
+and on and on and on. The garbage collector was quite new at the time, we were rather proud of it and curious about it, and our normal output was on a line printer, so it printed a full page every time it was called giving how many words were marked and how many were collected and the size of list space, etc. During a previous rehearsal, the garbage collector hadn't been called, but we had not refreshed the LISP core image, so we ran out of free storage during the demonstration.
+
+Nothing had ever been said about a garbage collector, and I could only imagine the reaction of the audience. We were already behind time on a tight schedule, it was clear that typing out the garbage collector message would take all the remaining time allocated to the demonstration, and both the lecturer and the audience were incapacitated by laughter. I think some of them thought we were victims of a practical joker.
+
+
+---
+
+Outline:
+
+> One list to bring them all,
+> One list to find them.
+> One list to rule them all,
+> And in parentheses bind them.
+
+* Introduction to lisp
+  * original paper
+  * lists
+  * atoms
+  * special forms
+* Motivation (me)
+* Motivation (others)
+* Introduction to komplott
+* Parsing lisp
+* Garbage collector
+* Printing lists
+* Eval
+  "The hard drive - the true heart of the mother modem"
+* Next steps
+  * Reduce line count (smallest possible lisp)
+  * Syscalls
+  * Standard library
+  * Macros
+  * Compiling
+  * CPS
+  * TCO
+* Papers and links
+
+
 > When I wrote the following pages, or rather the bulk of them, I
 > lived alone, in the woods, a mile from any neighbor, in a house
 > which I had built myself, on the shore of Walden Pond, in Concord,
@@ -8,25 +378,41 @@
 ---
 
 For those who don't know, the above quote is the opening line to
-Walden by Henry David Thoreau, one of my favorite books of all
-time. I mean, not just for the underlying message but also for the
-writing which is amazing. I really like the last line: At present, I'm
-a sojourner in civilized life again. It's like yeah, I'm wearing
-pants -- temporarily.
+Walden by Henry David Thoreau, great american author from the 19th
+century and pioneer environmentalist. It's really striking to read
+Walden now, how much of his thinking seems really contemporary. Also I
+really like the last line: At present, I'm a sojourner in civilized
+life again. Sums up life as a remote worker. It's like yeah, I'm
+wearing pants -- temporarily.
 
-When I started thinking about doing this talk, I really only had the
-project itself in mind. Yeah, I have this thing I want to do, and once
-I've done it I'll talk about it. Maybe even reproduce some of it live,
-it'll be great.
+It's also interesting that Thoreau was not really a luddite or against
+modern society. He wrote about the railroad, the latest invention of
+the time, as both a technological marvel that would be tremendously
+helpful to people and lamenting the environmental destruction and
+noise that it brought.
 
-Once I actually sat down to start writing the talk, though - after
-actually finishing the project I had set out to do for the
-presentation, which surprised and amazed me - I felt very defensive
-about it. Like, the main thing I felt I'd have to do was defending the
-very notion of doing something like this. Why would you even?
+I've kind of been having similarly mixed feelings towards computing
+and the internet. When I went to university in 1999, it was the height
+of the dot com bubble, and we really thought that the internet was
+going to change everything for the better. Everyone will have free
+access to information, it'll eliminate poverty and boost democracy
+world-wide, sharing is caring, everyone can make a website, no need
+to go through any middle-men anymore... Well, now it's obvious that
+sure, some of that is true but there's a massive dark side to the
+internet as well, the same technology that can power democracy can be
+used against it.
 
-So I'll try to explain why I am standing here talking about Lisp from
-1959 by way of Walden.
+In 2017 I gave a talk called Package managers all the way down where I
+really just wanted to express my concern over how programming
+languages have developed lately. Again, mixed feelings - I love
+tooling like cargo for rust which makes life really easy for
+developers, but at the same time handling thousands of dependencies
+turns out to be really hard and security is a big issue.
+
+So I guess both with computers in general and with programming, I've
+felt a need to pull a Walden. To grab my axe and walk into the woods
+and build myself a hut from scratch.
+
 
 First of all, to me Walden is about applying the scientific method to
 ones own life. What do I actually need, and what would make my life

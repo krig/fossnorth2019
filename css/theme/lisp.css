@@ -14,14 +14,14 @@ section.has-dark-background, section.has-dark-background h1, section.has-dark-ba
  * GLOBAL STYLES
  *********************************************/
 body {
-  background: #262228;
-  background-color: #262228; }
+  background: #EEEEEC;
+  background-color: #EEEEEC; }
 
 .reveal {
   font-family: "Computer Modern Typewriter", sans-serif;
   font-size: 40px;
   font-weight: normal;
-  color: #DDDDDD; }
+  color: #262228; }
 
 ::selection {
   color: #fff;
@@ -33,8 +33,8 @@ body {
   background: rgba(0, 0, 0, 0.99);
   text-shadow: none; }
 
-.reveal .slides > section,
-.reveal .slides > section > section {
+.reveal .slides section,
+.reveal .slides section > section {
   line-height: 1.3;
   font-weight: inherit; }
 
@@ -48,7 +48,7 @@ body {
 .reveal h5,
 .reveal h6 {
   margin: 0 0 20px 0;
-  color: #DDDDDD;
+  color: #262228;
   font-family: "Computer Modern Typewriter", sans-serif;
   font-weight: normal;
   line-height: 1.2;
@@ -159,7 +159,8 @@ body {
   box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.3); }
 
 .reveal code {
-  font-family: "Computer Modern Typewriter", monospace; }
+  font-family: "Computer Modern Typewriter", monospace;
+  text-transform: none; }
 
 .reveal pre code {
   display: block;
@@ -195,10 +196,12 @@ body {
   border-bottom: none; }
 
 .reveal sup {
-  vertical-align: super; }
+  vertical-align: super;
+  font-size: smaller; }
 
 .reveal sub {
-  vertical-align: sub; }
+  vertical-align: sub;
+  font-size: smaller; }
 
 .reveal small {
   display: inline-block;
@@ -234,7 +237,7 @@ body {
 .reveal section img {
   margin: 15px 0px;
   background: rgba(255, 255, 255, 0.12);
-  border: 4px solid #DDDDDD;
+  border: 4px solid #262228;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.15); }
 
 .reveal section img.plain {
@@ -255,45 +258,27 @@ body {
 /*********************************************
  * NAVIGATION CONTROLS
  *********************************************/
-.reveal .controls .navigate-left,
-.reveal .controls .navigate-left.enabled {
-  border-right-color: #01FF70; }
-
-.reveal .controls .navigate-right,
-.reveal .controls .navigate-right.enabled {
-  border-left-color: #01FF70; }
-
-.reveal .controls .navigate-up,
-.reveal .controls .navigate-up.enabled {
-  border-bottom-color: #01FF70; }
-
-.reveal .controls .navigate-down,
-.reveal .controls .navigate-down.enabled {
-  border-top-color: #01FF70; }
-
-.reveal .controls .navigate-left.enabled:hover {
-  border-right-color: #67ffa9; }
-
-.reveal .controls .navigate-right.enabled:hover {
-  border-left-color: #67ffa9; }
-
-.reveal .controls .navigate-up.enabled:hover {
-  border-bottom-color: #67ffa9; }
-
-.reveal .controls .navigate-down.enabled:hover {
-  border-top-color: #67ffa9; }
+.reveal .controls {
+  color: #01FF70; }
 
 /*********************************************
  * PROGRESS BAR
  *********************************************/
 .reveal .progress {
-  background: rgba(0, 0, 0, 0.2); }
+  background: rgba(0, 0, 0, 0.2);
+  color: #01FF70; }
 
 .reveal .progress span {
-  background: #01FF70;
   -webkit-transition: width 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985);
   -moz-transition: width 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985);
   transition: width 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985); }
+
+/*********************************************
+ * PRINT BACKGROUND
+ *********************************************/
+@media print {
+  .backgrounds {
+    background-color: #EEEEEC; } }
 
 .reveal pre {
   box-shadow: none; }
@@ -309,3 +294,6 @@ body {
   font-size: 0.66em;
   text-align: left;
   max-width: 70%; }
+
+.hljs {
+  color: #262228; }

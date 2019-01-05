@@ -22,11 +22,11 @@
 $monospaceFont: 'Computer Modern Typewriter', monospace;
 $mainFont: 'Computer Modern Typewriter', sans-serif;
 $headingFont: 'Computer Modern Typewriter', sans-serif;
-$mainColor: #DDDDDD;
-$headingColor: #DDDDDD;
+$mainColor: #262228;
+$headingColor: #262228;
 $headingTextShadow: none;
 $headingTextTransform: none;
-$backgroundColor: #262228;
+$backgroundColor: #EEEEEC;
 $linkColor: #01FF70;
 $linkColorHover: lighten( $linkColor, 20% );
 $selectionBackgroundColor: rgba(0, 0, 0, 0.99);
@@ -62,4 +62,8 @@ section.has-dark-background {
     font-size: 0.66em;
     text-align: left;
     max-width: 70%;
+}
+
+.hljs {
+    color: #262228;
 }

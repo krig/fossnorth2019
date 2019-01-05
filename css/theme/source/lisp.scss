@@ -20,14 +20,14 @@
 
 // Override theme settings (see ../template/settings.scss)
 $monospaceFont: 'Computer Modern Typewriter', monospace;
-$mainFont: 'Computer Modern Typewriter', sans-serif;
+$mainFont: 'Computer Modern Serif', sans-serif;
 $headingFont: 'Computer Modern Typewriter', sans-serif;
 $mainColor: #262228;
 $headingColor: #262228;
 $headingTextShadow: none;
 $headingTextTransform: none;
 $backgroundColor: #EEEEEC;
-$linkColor: #01FF70;
+$linkColor: #336B87;
 $linkColorHover: lighten( $linkColor, 20% );
 $selectionBackgroundColor: rgba(0, 0, 0, 0.99);
 

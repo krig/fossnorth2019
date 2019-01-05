@@ -80,8 +80,12 @@ After a couple of months, McCarthy came up with the eval function.
 > notation was devised for the purposes of the paper with no thought
 > that it would be used to express Lisp programs in practice.
 
-Steve Russell then realised that if he could implement eval and then
-feed the code to that, he wouldn't have to keep hand-compiling
+Steve Russell later went on to write Spacewar!, one of the earliest
+examples of a video game, so he's a pretty cool dude. Also his
+nickname is "Slug".
+
+Anyway, Steve Russell realised that if he could implement eval and
+then feed the code to that, he wouldn't have to keep hand-compiling
 things. He presented the idea to McCarthy, and here is what McCarthy
 said about that later in an interview:
 
@@ -105,14 +109,6 @@ and object oriented programming:
 > were “Maxwell’s Equations of Software!” This is the whole world of
 > programming in a few lines that I can put my hand over.
 - Alan Kay
-
-Today, there are a few different dialects of lisp in use. Scheme, most
-commonly in the free software world known via GNU Guile, is the oldest
-of these, followed by Common Lisp which was intended to be *the*
-standard programming language but never really caught on. Next comes
-Emacs lisp as used in the emacs text editor, and finally we have
-Clojure and ClojureScript which are quite a bit newer than the others
-and runs on the JVM and in the browser.
 
 ## S-expressions
 
@@ -156,14 +152,13 @@ the last punch card, just in case.
 Alright, so enough history, let's get to something concrete. Here's a
 speed intro to the world of Lisps.
 
+> foo
 > (a b c d)
-
-In its most basic form, Lisp has two kinds of elements: Lists and
-atoms. This is a list of four atoms, a b c and d.
-
 > ()
 
-This is an empty list.
+In its most basic form, Lisp has two kinds of elements: Lists and
+atoms. This is an atom called foo, and this is a list of four atoms, a
+b c and d, and finally an empty list.
 
 > ((a b c) (d e f))
 
@@ -200,27 +195,76 @@ already start to diverge.
 > #f
 > (atom? x) => #t
 
-In scheme, truth is represented by hash t and hash f, while in the
-original lisp anything that wasn't nil was true while nil was
-false. McCarthy called relying on nil being false "pornographic" at
-one point, he wasn't too happy about it, so here I'm showing the
-scheme version.
+In scheme, truth is represented by the atoms hash t and hash f, while
+in Common Lisp anything that isn't the empty list is true while the
+empty list is considered false. Here I'm showing the scheme version.
 
-> (cons x y) => (x y)
+> (quote a) => a
+> (quote (a b c)) => (a b c)
+> '(a b c) => (a b c)
+
+In order to be able to write something without evaluating it, like a
+list that shouldn't be read as a function call, we use something
+called `quote`, which doesn't evaluate its argument and just returns
+it. More modern lisps allow you to write a single quote in front of
+something and converts that into a call to `quote`.
+
+One thing to notice here is that lisp doesn't differentiate between
+data and code. Functions are just lists, and can be created and passed
+around just like everything else. There are no statements, everything
+is an expression.
+
+> (cons x '(y)) => (x y)
 > (car (cons x y)) => x
 > (cdr (cons x y)) => y
-> (list a b c) => (a b c)
 
 Here are some basic operations for manipulating lists. Lists are
 constructed as pairs, with the first element of the pair being the
 thing held by this node in the list, and the second element in the
 pair pointing to the next pair, or pointing to nil if this is the last
-element in the list.
+element in the list. `cons` appends a new element to the front of a
+list, and `car` and `cdr` extracts the elements of a list.
 
 Just to make this clearer, here are some boxes with arrows sticking
 out of them.
 
-## Controversial statement
+***
+
+Okay, now we start getting into more juicy stuff.
+
+> (cond ((atom? (quote (a b c))) 10) (#t 20)) => 20
+
+`cond` is the basic conditional expression. In fact, lisp was the
+first language to have a conditional expression, so this was quite an
+innovation. `cond` takes a series of pairs and iterates over the pairs
+one by one, evaluating the first element in the pair and if it's true,
+evaluating the second element. If false, it moves on to the next pair.
+
+> (equal a b)
+
+`equal` returns true if a and b are the same, meaning the same atom or
+both are the empty list. We can define a more complicated equality
+function later which would compare lists element by element, but the
+most basic comparison just decides that lists with elements in them
+are always unique and different from each other.
+
+> (lambda (x) (* x x))
+
+We've seen lambda before, which lets us define functions.
+
+> (define square (lambda (x) (* x x )))
+
+Using `define`, we can give a name to our function.
+
+## Lisp today
+
+Today, there are a few different dialects of lisp in use. Scheme, most
+commonly in the free software world known via GNU Guile, is the oldest
+of these, followed by Common Lisp which was intended to be *the*
+standard programming language but never really caught on. Next comes
+Emacs lisp as used in the emacs text editor, and finally we have
+Clojure and ClojureScript which are quite a bit newer than the others
+and runs on the JVM and in the browser.
 
 I think Lisp is great, but I'm not a huge fan of any particular
 implementation. The closest thing to a lisp that I would use would

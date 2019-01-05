@@ -93,6 +93,19 @@ said about that later in an interview:
 > interpreter, which it certainly was. So at that point Lisp had
 > essentially the form that it has today....
 
+So implementing eval in Lisp was not just the origins of interpreted
+languages, but it was also a kind of universal definition of what a
+programming language is, at its core. And that really fascinates
+me. Here is a famous quote from Alan Kay, the inventor of Smalltalk
+and object oriented programming:
+
+> Yes, that was the big revelation to me when I was in graduate
+> school—when I finally understood that the half page of code on the
+> bottom of page 13 of the Lisp 1.5 manual was Lisp in itself. These
+> were “Maxwell’s Equations of Software!” This is the whole world of
+> programming in a few lines that I can put my hand over.
+- Alan Kay
+
 Today, there are a few different dialects of lisp in use. Scheme, most
 commonly in the free software world known via GNU Guile, is the oldest
 of these, followed by Common Lisp which was intended to be *the*
@@ -198,7 +211,57 @@ scheme version.
 > (cdr (cons x y)) => y
 > (list a b c) => (a b c)
 
-Here are some basic operations for manipulating lists.
+Here are some basic operations for manipulating lists. Lists are
+constructed as pairs, with the first element of the pair being the
+thing held by this node in the list, and the second element in the
+pair pointing to the next pair, or pointing to nil if this is the last
+element in the list.
+
+Just to make this clearer, here are some boxes with arrows sticking
+out of them.
+
+## Controversial statement
+
+I think Lisp is great, but I'm not a huge fan of any particular
+implementation. The closest thing to a lisp that I would use would
+probably be Guile, which is a scheme implementation used for example
+in Guix, a functional package manager based on Nix.
+
+MORE GUIX HERE
+
+## komplott
+
+OK, so now that we know what Lisp is and what to do with it, lets make
+one ourselves.
+
+The most common demonstration of implementing lisp is to implement
+lisp in lisp. This is a neat trick and it's what McCarthy did in one
+page back in 1959, and what Alan Kay called Maxwell's Equations of
+software. It's not all that enlightening though, at least it wasn't
+for me. So a slightly different trick is to implement lisp in C, so
+that someone coming from a "normal" programming language can get a
+sense of what's going on.
+
+This is something that I've done a few times and that I would
+recommend everyone doing as a fun exercise if nothing else. The one
+I'm going to show you here is at 560 lines of code and include a
+garbage collector. Hopefully I'll have time to get into that.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # Timeline
 

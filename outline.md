@@ -287,9 +287,21 @@ that someone coming from a "normal" programming language can get a
 sense of what's going on.
 
 This is something that I've done a few times and that I would
-recommend everyone doing as a fun exercise if nothing else. The one
-I'm going to show you here is at 560 lines of code and include a
-garbage collector. Hopefully I'll have time to get into that.
+recommend everyone doing as a fun exercise if nothing else.
+
+So the one I'm going to show today is about 560 lines of C, and it's a
+very basic interpreter that is fairly close to the fifties lisp
+version. It includes a version of the LISP 1.5 eval function from page
+13 earlier, and it also includes a copying garbage collector. So lets
+start there.
+
+The garbage collector is based on a paper from 1970, and is a
+brilliantly compact implementation that has pretty good
+performance. When the first LISP was implemented they came up with the
+idea of a garbage collector, but since they only implemented small
+programs they never bothered to implement one. That came later.
+
+
 
 
 

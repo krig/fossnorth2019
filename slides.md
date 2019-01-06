@@ -142,18 +142,16 @@ https://creativecommons.org/licenses/by/2.0/
 
 ---
 
-# s-expressions
+## (s-expressions)
 
 ---
 
-```
-To prevent reading from continuing indefinitely, each packet should
-end with STOP followed by a large number of right parentheses. An
-unpaired right parenthesis will cause a read error and terminate
-reading.
+> To prevent reading from continuing indefinitely, each packet should
+> end with STOP followed by a large number of right parentheses. An
+> unpaired right parenthesis will cause a read error and terminate
+> reading.
 
-STOP )))))))))))))))))
-```
+<small>&mdash; LISP 1.5 Programmers Manual</small>
 
 ---
 
@@ -267,128 +265,359 @@ foo
 
 ---
 
-- One
-- Two <!-- .element: class="fragment" -->
-- Three <!-- .element: class="fragment" -->
+### Writing a Lisp interpreter
 
 ---
 
-
-> When I wrote the following pages, or rather the bulk of them, I
-> lived alone, in the woods, a mile from any neighbor, in a house
-> which I had built myself, on the shore of Walden Pond, in Concord,
-> Massachusetts, and earned my living by the labor of my hands only. I
-> lived there two years and two months. At present I am a sojourner in
-> civilized life again.
+https://github.com/krig/LISP
 
 ---
 
-> Yes, that was the big revelation to me when I was in graduate
-> school—when I finally understood that the half page of code on the
-> bottom of page 13 of the Lisp 1.5 manual was Lisp in itself. These
-> were “Maxwell’s Equations of Software!” This is the whole world of
-> programming in a few lines that I can put my hand over.
+* ~560 lines of C
+* Copying garbage collector
+* Implementation of LISP 1.5 eval
 
 ---
 
-<!-- .slide: data-background-image="img/lisp15.png" -->
-
----
-
-<!-- .slide: data-background-image="img/evalquote.png" data-background-size="contain" -->
-
----
-
-#### Recursive Functions of Symbolic Expressions 
-#### and Their Computation by Machine, Part I
-
----
-
-> [..] whereby a machine could be instructed to handle declarative as
-> well as imperative sentences and could exhibit “common sense” in
-> carrying out its instructions.
-
----
-
-This is not the greatest lisp in the world.
-
-This is just a tribute.
-
----
-
-github.com/krig/LISP
-
----
-
-# ?
-
----
-
-## special forms
+### 1. Allocation
 
 ---
 
 ```
-(quote X) ; -> X
+typedef enum { T_CONS, T_ATOM, T_CFUNC, T_LAMBDA } object_tag;
 
-(cons X Y) ; -> (X Y)
+struct object_t;
+typedef struct object_t *(*cfunc)(struct object_t *);
 
-(cond (<case1> <then1>) (<case2> <then2>) ...)
-
-(begin EXPR...)
-
-(or EXPR...)
-
-(define NAME EXPR)
-
-(lambda (ARG...) BODY...)
+typedef struct object_t {
+	struct object_t *car, *cdr;
+	object_tag tag;
+} object;
 ```
 
 ---
 
-## `lisp15.scm`
+#### A Nonrecursive List Compacting Algorithm
+
+<small>C.J. Cheney, 1970</small>
 
 ---
 
 ```
-(define cadr (lambda (c) (car (cdr c))))
-(define cdar (lambda (c) (cdr (car c))))
-(define caar (lambda (c) (car (car c))))
-(define cddr (lambda (c) (cdr (cdr c))))
-(define caadr (lambda (c) (car (car (cdr c)))))
-(define cadar (lambda (c) (car (cdr (car c)))))
-(define caaar (lambda (c) (car (car (car c)))))
-(define caddr (lambda (c) (car (cdr (cdr c)))))
-(define cdadr (lambda (c) (cdr (car (cdr c)))))
-(define cddar (lambda (c) (cdr (cdr (car c)))))
-(define cdaar (lambda (c) (cdr (car (car c)))))
-(define cdddr (lambda (c) (cdr (cdr (cdr c)))))
-(define not (lambda (x) (cond ((null? x) #t) (#t #f))))
-(define atom? (lambda (x) (cond ((null? x) #f) ((pair? x) #f) (#t #t))))
-(define else #t)
-
+object *gc_alloc(object_tag tag, object *car, object *cdr) {
+	if (allocptr + 1 > fromspace + HEAPSIZE)
+		gc_collect();
+	if (allocptr + 1 > fromspace + HEAPSIZE)
+		abort();
+	allocptr->tag = tag;
+	allocptr->car = car;
+	allocptr->cdr = cdr;
+	return allocptr++;
+}
 ```
 
 ---
 
 ```
-; build assoclist from lists of keys and values
-; x = keys
-; y = values
-; a = assoclist
-(define pairlis (lambda (x y a)
-                  (cond ((null? x) a)
-                        (else (cons (cons (car x) (car y))
-                                    (pairlis (cdr x) (cdr y) a))))))
+void gc_collect(void) {
+	object *tmp = fromspace;
+	fromspace = tospace;
+	tospace = tmp;
+	allocptr = scanptr = fromspace;
+
+	for (size_t i = 0; i < numroots; ++i)
+		gc_copy(roots[i]);
+
+	for (; scanptr < allocptr; ++scanptr)
+		if (scanptr->tag == T_CONS) {
+			gc_copy(&(scanptr->car));
+			gc_copy(&(scanptr->cdr));
+		}
+}
 ```
 
 ---
 
 ```
-; find value matching key in assoclist
-; x = key
-; a = assoclist
-(define assoc (lambda (x a)
-                (cond ((equal? (caar a) x) (car a))
-                      (else (assoc x (cdr a))))))
+void gc_copy(object **root) {
+	if (*root == NULL)
+		return;
+	if ((*root)->car == &fwdmarker) {
+		*root = (*root)->cdr;
+	} else if (*root < fromspace || *root >= (fromspace + HEAPSIZE)) {
+		object *p = allocptr++;
+		memcpy(p, *root, sizeof(object));
+		(*root)->car = &fwdmarker;
+		(*root)->cdr = p;
+		*root = p;
+	}
+}
 ```
+
+---
+
+```
+void gc_protect(object **r, ...) {
+	rootstack[roottop++] = numroots;
+	va_list args;
+	va_start(args, r);
+	for (object ** p = r; p != NULL; p = va_arg(args, object **)) {
+		assert(numroots < MAXROOTS);
+		roots[numroots++] = p;
+	}
+	va_end(args);
+}
+
+void gc_pop(void) {
+	numroots = rootstack[--roottop];
+}
+```
+
+---
+
+### 2. Read
+
+---
+
+```
+object *lisp_read(FILE *in) {
+	const char *tok = read_token(in);
+	if (tok == NULL)
+		return NULL;
+	if (tok[0] != ')')
+		return lisp_read_obj(tok, in);
+	fprintf(stderr, "Error: Unexpected )\n");
+	return NULL;
+}
+```
+
+---
+
+```
+const char *read_token(FILE *in) {
+	int n = 0;
+	while (isspace(token_peek))
+		token_peek = fgetc(in);
+	if (token_peek == '(' || token_peek == ')') {
+		token_text[n++] = token_peek;
+		token_peek = fgetc(in);
+	} else while (ATOMCHAR(token_peek)) {
+		token_text[n++] = token_peek;
+		token_peek = fgetc(in);
+	}
+	if (token_peek == EOF) exit(0);
+	token_text[n] = '\0';
+	return intern_string(token_text);
+}
+```
+
+---
+
+```
+object *lisp_read_obj(const char *tok, FILE *in) {
+	return (tok[0] != '(') ? new_atom(tok) :
+		lisp_read_list(read_token(in), in);
+}
+```
+
+---
+
+```
+object *lisp_read_list(const char *tok, FILE *in) {
+	if (tok[0] == ')')
+		return NULL;
+	object *obj = NULL, *tmp = NULL, *obj2 = NULL;
+	obj = lisp_read_obj(tok, in);
+	tok = read_token(in);
+	tmp = lisp_read_list(tok, in);
+	obj2 = new_cons(obj, tmp);
+	return obj2;
+}
+```
+
+---
+
+### 3. Print
+
+---
+
+```
+void lisp_print(object *obj) {
+	if (obj == NULL) {
+		printf("()");
+	} else if (obj->tag == T_ATOM) {
+		printf("%s", TEXT(obj));
+	} else if (obj->tag == T_CFUNC) {
+		printf("<C@%p>", (void *)obj);
+	} else if (obj->tag == T_LAMBDA) {
+		printf("<lambda ");
+		lisp_print(obj->car);
+		printf(">");
+	} else if (obj->tag == T_CONS) {
+      /* next slide ... */
+	}
+}
+```
+
+---
+
+```
+		printf("(");
+		for (;;) {
+			lisp_print(obj->car);
+			if (obj->cdr == NULL)
+				break;
+			printf(" ");
+			obj = obj->cdr;
+		}
+		printf(")");
+```
+
+---
+
+### 4. Eval
+
+---
+
+```
+object *lisp_eval(object *expr, object *env) {
+restart:
+	if (expr == NULL)
+		return expr;
+	if (expr->tag == T_ATOM && match_number(TEXT(expr)))
+		return expr;
+	if (expr->tag == T_ATOM)
+		return env_lookup(expr, env);
+	if (expr->tag != T_CONS)
+		return expr;
+    
+    ...
+```
+
+---
+
+```
+	if (expr == NULL)
+		return expr;
+	if (expr->tag == T_ATOM && match_number(TEXT(expr)))
+		return expr;
+	if (expr->tag == T_ATOM)
+		return env_lookup(expr, env);
+	if (expr->tag != T_CONS)
+		return expr;
+```
+
+---
+
+```
+	object *head = expr->car;
+
+    if (TEXT(head) == TQUOTE) {
+		return expr->cdr->car;
+	} else if (TEXT(head) == TCOND) {
+```
+
+---
+
+```
+	} else if (TEXT(head) == TCOND) {
+		object *item = NULL, *cond = NULL;
+		for (item = expr->cdr; item != NULL; item = item->cdr) {
+			cond = item->car;
+			if (lisp_eval(cond->car, env) != NULL) {
+				expr = cond->cdr->car;
+				goto restart;
+			}
+		}
+		abort();
+	} else if (TEXT(head) == TDEFINE) {
+```
+
+---
+
+```
+	} else if (TEXT(head) == TDEFINE) {
+		object *name = NULL;
+		object *value = NULL;
+		name = expr->cdr->car;
+		value = lisp_eval(expr->cdr->cdr->car, env);
+		env_set(env, name, value);
+		return value;
+	} else if (TEXT(head) == TLAMBDA) {
+```
+
+---
+
+```
+	} else if (TEXT(head) == TLAMBDA) {
+		expr->cdr->tag = T_LAMBDA;
+		return expr->cdr;
+	}
+```
+
+---
+
+```
+	object *fn = NULL, *args = NULL, *params = NULL, *param = NULL;
+	fn = lisp_eval(head, env);
+	if (fn->tag == T_CFUNC) {
+```
+
+---
+
+```
+	if (fn->tag == T_CFUNC) {
+		for (params = expr->cdr; params != NULL; params = params->cdr) {
+			param = lisp_eval(params->car, env);
+			args = new_cons(param, args);
+		}
+		object *ret = ((cfunc)fn->car)(list_reverse(args));
+		return ret;
+	} else if (fn->tag == T_LAMBDA) {
+```
+
+---
+
+```
+	} else if (fn->tag == T_LAMBDA) {
+		object *callenv = new_env(env);
+		args = fn->car;
+		object *item = NULL;
+		for (params = expr->cdr; params != NULL; params = params->cdr, args = args->cdr) {
+			param = lisp_eval(params->car, env);
+			env_set(callenv, args->car, param);
+		}
+```
+
+---
+
+```
+        
+		for (item = fn->cdr; item != NULL; item = item->cdr) {
+			if (item->cdr == NULL) {
+				expr = item->car;
+				env = callenv;
+				goto restart;
+			}
+			lisp_eval(item->car, callenv);
+		}
+	}
+```
+
+---
+
+```
+	for (;;) {
+		obj = lisp_read(in);
+		obj = lisp_eval(obj, env);
+		lisp_print(obj);
+		printf("\n");
+	}
+```
+
+---
+
+```
+STOP ))))))))))))))
+```
+

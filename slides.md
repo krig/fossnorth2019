@@ -91,33 +91,6 @@ Source: https://twitter.com/emnland/status/984120618441469952
 
 --
 
-<img src="img/fox.jpg" style="max-height: 550px">
-
-Dr. Phyllis Fox
-
-Note:
-
-1958: Dr. Phyllis Fox started a human computer on the Univac together
-with Jean Jennings Bartik from the ENIAC. She then wrote the DYNAMO
-language, which was a very early simulation language. Wrote the first
-manual for LISP and is credited as a collaborator on the first LISP
-interpreter. As far as I can tell, apart from McCarthy everyone else
-on the team were grad students, so she would have been the only one
-with experience implementing a programming language.
-
-Dynamo was used for the "Limits to Growth" simulation in 1972 which
-became very famous. 
-
-"Two of the scenarios saw "overshoot and collapse" of the global
-system by the mid- to latter-part of the 21st century, while a third
-scenario resulted in a "stabilized world"."
-
-After her time at MIT she moved to Bell Labs (birthplace of Unix),
-where she created a maths library called PORT. Also wrote a library
-called HEMP (High Efficiency Matrix Package).
-
---
-
 <img src="img/vera2.jpg" style="max-height: 550px">
 
 Note:
@@ -147,6 +120,33 @@ Source:
 https://commons.wikimedia.org/wiki/File:Gaint_annapurna_I.jpg
 By Mohan K. Duwal, (CC BY-SA 3.0)
 https://creativecommons.org/licenses/by-sa/3.0/deed.en
+
+--
+
+<img src="img/fox.jpg" style="max-height: 550px">
+
+Dr. Phyllis Fox
+
+Note:
+
+1958: Dr. Phyllis Fox started a human computer on the Univac together
+with Jean Jennings Bartik from the ENIAC. She then wrote the DYNAMO
+language, which was a very early simulation language. Wrote the first
+manual for LISP and is credited as a collaborator on the first LISP
+interpreter. As far as I can tell, apart from McCarthy everyone else
+on the team were grad students, so she would have been the only one
+with experience implementing a programming language.
+
+Dynamo was used for the "Limits to Growth" simulation in 1972 which
+became very famous. 
+
+"Two of the scenarios saw "overshoot and collapse" of the global
+system by the mid- to latter-part of the 21st century, while a third
+scenario resulted in a "stabilized world"."
+
+After her time at MIT she moved to Bell Labs (birthplace of Unix),
+where she created a maths library called PORT. Also wrote a library
+called HEMP (High Efficiency Matrix Package).
 
 ---
 
@@ -267,6 +267,12 @@ foo
 ---
 
 ```
+(f x)
+```
+
+---
+
+```
 #t
 
 #f
@@ -297,12 +303,6 @@ foo
 ---
 
 ```
-(f x)
-```
-
----
-
-```
 (lambda (x) (* x 2))
 ```
 
@@ -326,12 +326,6 @@ foo
 
 ```
 (equal a b)
-```
-
----
-
-```
-(lambda (x) (* x x))
 ```
 
 ---
@@ -374,7 +368,7 @@ foo
 
 ---
 
-The lisp I want to use hasn't been written yet.
+## I 🖤 Lisp.
 
 ---
 

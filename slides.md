@@ -14,6 +14,16 @@ kgronlund@suse.com
 
 <img src="img/mccarthy.jpg" style="max-height:500px;">
 
+Note:
+
+Source: Courtesy of Stanford University
+
+John McCarthy used an improved version of the Kotok program to play
+correspondence chess against a Soviet program developed at the Moscow
+Institute for Theoretical and Experimental Physics (ITEP) by George
+Adelson-Velsky and others. In 1967, a four-game match played over nine
+months was won 3-1 by the Soviet program.
+
 ---
 
 > Our ultimate objective is to make programs that learn from their
@@ -39,7 +49,76 @@ kgronlund@suse.com
 
 ---
 
-<!-- .slide: data-background-image="img/ibm-704.jpg" data-background-size="contain" -->
+<img src="img/ibm-704.jpg" style="max-height: 550px">
+
+Note:
+
+Source: https://commons.wikimedia.org/wiki/File:IBM_Electronic_Data_Processing_Machine_-_GPN-2000-001881.jpg
+
+--
+
+<img src="img/eniac.jpg" >
+
+Note:
+
+1948: Jean Jeannings Bartik, started as a human computer during the
+war and led the team of six women that programmed ENIAC. Also in the
+photo: Fran Bilas.
+
+"Because they were women, it was assumed that the work they did must
+not have been very difficult."
+
+Jean Bartik's autobiography:
+https://www.amazon.com/Pioneer-Programmer-Jennings-Computer-Changed/dp/1612480861
+
+Interview:
+https://www.youtube.com/watch?v=aPweFhhXFvY
+
+--
+
+<img src="img/elsa.jpg" style="max-height: 550px">
+
+
+Note:
+
+1950: Elsa-Karin Boestad-Nilsson, programmer on the first computer in
+Sweden, called BARK.
+
+Source: https://twitter.com/emnland/status/984120618441469952
+
+--
+
+<img src="img/fox.jpg" style="max-height: 550px">
+
+Note:
+
+1958: Phyllis Fox was part of the team that wrote the DYNAMO language,
+which was a very early simulation language. She then wrote the first
+manual for LISP and is credited as a collaborator on the first LISP
+interpreter. As far as I can tell, apart from McCarthy everyone else
+on the team were grad students, so she would have been the only one
+with experience implementing a programming language.
+
+--
+
+<img src="img/vera2.jpg" style="max-height: 550px">
+
+Note:
+
+Vera Watson was the wife of John McCarthy and was also a notable
+programmer. She was originally of chinese russian descent and was
+hired to work on machine language translation but proved to be a very
+skilled programmer. She was later involved in developing the IBM
+System R, the first SQL database. Outside programming she was also an
+accomplished mountain climber. In 1974 she became the first woman to
+ascend Aconcagua, the highest mountain in the southerna and western
+hemispheres. Sadly, she perished while trying for the peak of
+Annapurna in 1978, as part of the American Women's Himalayan
+Expedition, of which two different members of the team had reached the
+peak two days earlier.
+
+Source:
+http://aac-publications.s3.amazonaws.com/documents/aaj/1979/PDF/AAJ_1979_22_1_345.pdf
 
 ---
 
@@ -269,7 +348,7 @@ foo
 
 ---
 
-https://github.com/krig/LISP
+<a href="https://github.com/krig/LISP">github.com/krig/lisp</a>
 
 ---
 

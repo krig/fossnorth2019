@@ -92,12 +92,24 @@ Source: https://twitter.com/emnland/status/984120618441469952
 
 Note:
 
-1958: Phyllis Fox was part of the team that wrote the DYNAMO language,
-which was a very early simulation language. She then wrote the first
+1958: Dr. Phyllis Fox started a human computer on the Univac together
+with Jean Jennings Bartik from the ENIAC. She then wrote the DYNAMO
+language, which was a very early simulation language. Wrote the first
 manual for LISP and is credited as a collaborator on the first LISP
 interpreter. As far as I can tell, apart from McCarthy everyone else
 on the team were grad students, so she would have been the only one
 with experience implementing a programming language.
+
+Dynamo was used for the "Limits to Growth" simulation in 1972 which
+became very famous. 
+
+"Two of the scenarios saw "overshoot and collapse" of the global
+system by the mid- to latter-part of the 21st century, while a third
+scenario resulted in a "stabilized world"."
+
+After her time at MIT she moved to Bell Labs (birthplace of Unix),
+where she created a maths library called PORT. Also wrote a library
+called HEMP (High Efficiency Matrix Package).
 
 --
 
@@ -107,11 +119,11 @@ Note:
 
 Vera Watson was the wife of John McCarthy and was also a notable
 programmer. She was originally of chinese russian descent and was
-hired to work on machine language translation but proved to be a very
-skilled programmer. She was later involved in developing the IBM
-System R, the first SQL database. Outside programming she was also an
-accomplished mountain climber. In 1974 she became the first woman to
-ascend Aconcagua, the highest mountain in the southerna and western
+hired by IBM to work on machine language translation but proved to be
+a very skilled programmer. She was later involved in developing the
+IBM System R, the first SQL database. Outside programming she was also
+an accomplished mountain climber. In 1974 she became the first woman
+to ascend Aconcagua, the highest mountain in the southerna and western
 hemispheres. Sadly, she perished while trying for the peak of
 Annapurna in 1978, as part of the American Women's Himalayan
 Expedition, of which two different members of the team had reached the
@@ -119,6 +131,10 @@ peak two days earlier.
 
 Source:
 http://aac-publications.s3.amazonaws.com/documents/aaj/1979/PDF/AAJ_1979_22_1_345.pdf
+
+--
+
+<!-- .slide: data-background-image="img/annapurna.jpg"  data-background-size="contain" -->
 
 ---
 
@@ -178,16 +194,6 @@ https://creativecommons.org/licenses/by/2.0/
 
 ---
 
-<img src="img/494430799_2e96732ca3_b.jpg" style="max-height:500px;" class="plain">
-
-<small>Photo by <a href="https://creativecommons.org/licenses/by/2.0/">Joi Ito</a></small>
-
-Note:
-Photo by Joi Ito
-https://creativecommons.org/licenses/by/2.0/
-
----
-
 > Steve Russell said, look, why don't I program this eval..., and I
 > said to him, ho, ho, you're confusing theory with practice, this
 > eval is intended for reading, not for computing.
@@ -204,20 +210,6 @@ https://creativecommons.org/licenses/by/2.0/
 > essentially the form that it has today....
 
 <small>&mdash; John McCarthy</small>
-
----
-
-> Yes, that was the big revelation to me when I was in graduate
-> school—when I finally understood that the half page of code on the
-> bottom of page 13 of the Lisp 1.5 manual was Lisp in itself. These
-> were “Maxwell’s Equations of Software!” This is the whole world of
-> programming in a few lines that I can put my hand over.
-
-<small>&mdash; Alan Kay</small>
-
----
-
-<!-- .slide: data-background-image="img/evalquote.png" data-background-color="#ffffff" data-background-size="contain" -->
 
 ---
 
@@ -244,27 +236,21 @@ foo
 
 ---
 
+<!-- .slide: data-background-color="#ffffff" -->
+
+<img src="img/first-slide.png" class="plain">
+
+---
+
 ```
 ((a b c) (d e f))
 ```
 
 ---
 
-```
-(f x)
-```
+<!-- .slide: data-background-color="#ffffff" -->
 
----
-
-```
-(lambda (x) (* x 2))
-```
-
----
-
-```
-((lambda (x) (* x 2)) 4)
-```
+<img src="img/second-slide.png" class="plain">
 
 ---
 
@@ -294,6 +280,24 @@ foo
 (car (cons x y)) => x
 
 (cdr (cons x y)) => y
+```
+
+---
+
+```
+(f x)
+```
+
+---
+
+```
+(lambda (x) (* x 2))
+```
+
+---
+
+```
+((lambda (x) (* x 2)) 4)
 ```
 
 ---
@@ -331,6 +335,20 @@ foo
   (cond ((equal n 0) 1)
         (#t (* n (fac (- n 1)))))))
 ```
+
+---
+
+<!-- .slide: data-background-image="img/evalquote.png" data-background-color="#ffffff" data-background-size="contain" -->
+
+---
+
+> Yes, that was the big revelation to me when I was in graduate
+> school—when I finally understood that the half page of code on the
+> bottom of page 13 of the Lisp 1.5 manual was Lisp in itself. These
+> were “Maxwell’s Equations of Software!” This is the whole world of
+> programming in a few lines that I can put my hand over.
+
+<small>&mdash; Alan Kay</small>
 
 ---
 

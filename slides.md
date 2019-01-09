@@ -59,6 +59,8 @@ Source: https://commons.wikimedia.org/wiki/File:IBM_Electronic_Data_Processing_M
 
 <img src="img/eniac.jpg" >
 
+Jean Jennings and Fran Bilas, ENIAC, 1948
+
 Note:
 
 1948: Jean Jeannings Bartik, started as a human computer during the
@@ -78,6 +80,7 @@ https://www.youtube.com/watch?v=aPweFhhXFvY
 
 <img src="img/elsa.jpg" style="max-height: 550px">
 
+Elsa-Karin Boestad-Nilsson
 
 Note:
 
@@ -89,6 +92,8 @@ Source: https://twitter.com/emnland/status/984120618441469952
 --
 
 <img src="img/fox.jpg" style="max-height: 550px">
+
+Dr. Phyllis Fox
 
 Note:
 
@@ -135,6 +140,13 @@ http://aac-publications.s3.amazonaws.com/documents/aaj/1979/PDF/AAJ_1979_22_1_34
 --
 
 <!-- .slide: data-background-image="img/annapurna.jpg"  data-background-size="contain" -->
+
+Note:
+
+Source:
+https://commons.wikimedia.org/wiki/File:Gaint_annapurna_I.jpg
+By Mohan K. Duwal, (CC BY-SA 3.0)
+https://creativecommons.org/licenses/by-sa/3.0/deed.en
 
 ---
 

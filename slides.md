@@ -1,10 +1,15 @@
+<!-- .slide: data-background-image="img/front.png" data-background-color="#387a3b" -->
 
-<h1 style="font-size:1000%;">()</h1>
+---
 
-```
-Kristoffer Grönlund
-kgronlund@suse.com
-```
+Recursive Functions of Symbolic Expressions and Their Computation by
+Machine, Part I
+
+<small>John McCarthy, Massachusetts Institute of Technology,
+Cambridge, Mass.</small>
+
+
+<small>April 1960</small>
 
 ---
 
@@ -49,7 +54,7 @@ months was won 3-1 by the Soviet program.
 
 ---
 
-<img src="img/ibm-704.jpg" style="max-height: 550px">
+<img src="img/ibm-704.jpg" style="max-height: 500px">
 
 Note:
 
@@ -78,7 +83,7 @@ https://www.youtube.com/watch?v=aPweFhhXFvY
 
 --
 
-<img src="img/elsa.jpg" style="max-height: 550px">
+<img src="img/elsa.jpg" style="max-height: 500px">
 
 Elsa-Karin Boestad-Nilsson
 
@@ -91,7 +96,7 @@ Source: https://twitter.com/emnland/status/984120618441469952
 
 --
 
-<img src="img/vera2.jpg" style="max-height: 550px">
+<img src="img/vera2.jpg" style="max-height: 500px">
 
 Note:
 
@@ -112,7 +117,7 @@ http://aac-publications.s3.amazonaws.com/documents/aaj/1979/PDF/AAJ_1979_22_1_34
 
 --
 
-<!-- .slide: data-background-image="img/annapurna.jpg"  data-background-size="contain" -->
+<!-- .slide: data-background-image="img/annapurna.jpg" data-background-color="#000000" data-background-size="contain" -->
 
 Note:
 
@@ -123,7 +128,7 @@ https://creativecommons.org/licenses/by-sa/3.0/deed.en
 
 --
 
-<img src="img/fox.jpg" style="max-height: 550px">
+<img src="img/fox.jpg" style="max-height: 500px">
 
 Dr. Phyllis Fox
 
@@ -368,11 +373,9 @@ foo
 
 ---
 
-## I 🖤 Lisp.
+#### This is not the greatest lisp in the world.
 
----
-
-### Writing a Lisp interpreter
+#### This is just a tribute.
 
 ---
 

@@ -11,6 +11,12 @@ Cambridge, Mass.</small>
 
 <small>April 1960</small>
 
+Note:
+
+Papers we love. This talk is going to be a historical deep dive,
+followed by way too many slides covered in source code. If we get that
+far. Hopefully it will be entertaining at least.
+
 ---
 
 # 1955 - 58
@@ -216,15 +222,6 @@ https://creativecommons.org/licenses/by/2.0/
 > eval is intended for reading, not for computing.
 >
 > But he went ahead and did it.
-
-<small>&mdash; John McCarthy</small>
-
----
-
-> That is, he compiled the eval in my paper into [IBM] 704
-> machine code, fixing bugs, and then advertised this as a Lisp
-> interpreter, which it certainly was. So at that point Lisp had
-> essentially the form that it has today....
 
 <small>&mdash; John McCarthy</small>
 

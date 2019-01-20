@@ -389,6 +389,16 @@ portable, flexible - so small that it fits on a piece of paper.
 
 ---
 
+### Reinventing the Wheel
+
+Note:
+
+Reinventing the wheel is good - refining tools and processes - make
+the wheel as small as possible. Iterate and hone tools and
+skills. Parallel - nomadic life style - survival in harsh climates.
+
+---
+
 #### This is not the greatest lisp in the world.
 
 #### This is just a tribute.

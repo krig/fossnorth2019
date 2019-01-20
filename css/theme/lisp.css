@@ -281,7 +281,9 @@ body {
     background-color: #F8F8F8; } }
 
 .reveal pre {
-  box-shadow: none; }
+  box-shadow: none;
+  font-size: 0.75em;
+  line-height: 1.2em; }
 
 .reveal blockquote {
   box-shadow: none;

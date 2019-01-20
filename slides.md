@@ -21,6 +21,10 @@ far. Hopefully it will be entertaining at least.
 
 # 1955 - 58
 
+Note:
+
+MIT AI lab started ~1955 by Marvin Minsky and John McCarthy.
+
 ---
 
 <img src="img/mccarthy.jpg" style="max-height:500px;">
@@ -53,6 +57,11 @@ months was won 3-1 by the Soviet program.
 - 1956 - IPL 2
 - 1957 - FORTRAN <!-- .element: class="fragment" -->
 - 1958 - LISP <!-- .element: class="fragment" -->
+
+Note:
+
+IPL: List processing language
+Fortran: First higher-level language
 
 ---
 
@@ -362,11 +371,21 @@ foo
 
 ### Lisp Today
 
-- Scheme <!-- .element: class="fragment" -->
-- Common Lisp <!-- .element: class="fragment" -->
-- Emacs Lisp <!-- .element: class="fragment" -->
-- Clojure <!-- .element: class="fragment" -->
-- Clojurescript <!-- .element: class="fragment" -->
+Note:
+
+Scheme, Common Lisp, Emacs Lisp, Clojure, Clojurescript
+GC/VM: Java, Javascript, Perl, Ruby, Python
+
+---
+
+### Lisp & Linux
+
+Note:
+
+Why open source is important: Unbroken connection to the past.
+Wisdom and craft. Culture.
+Lisp: First time source code mattered beyond the machine - easily
+portable, flexible - so small that it fits on a piece of paper.
 
 ---
 

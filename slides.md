@@ -115,17 +115,14 @@ Source: https://twitter.com/emnland/status/984120618441469952
 
 Note:
 
-Vera Watson was the wife of John McCarthy and was also a notable
-programmer. She was originally of chinese russian descent and was
-hired by IBM to work on machine language translation but proved to be
-a very skilled programmer. She was later involved in developing the
-IBM System R, the first SQL database. Outside programming she was also
-an accomplished mountain climber. In 1974 she became the first woman
-to ascend Aconcagua, the highest mountain in the southerna and western
-hemispheres. Sadly, she perished while trying for the peak of
-Annapurna in 1978, as part of the American Women's Himalayan
-Expedition, of which two different members of the team had reached the
-peak two days earlier.
+Wife of JMC. Notable programmer.
+Chinese russian descent, hired by IBM for machine language
+translation but proved to be a very skilled programmer.
+Worked on IBM System R, the first SQL database.
+1974: First woman to ascend Aconcagua, highest mountain in southern
+and western hemispheres.
+1978: American Women's Himalayan Expedition, Annapurna I, died.
+Two other members of the team did reach the peak.
 
 Source:
 http://aac-publications.s3.amazonaws.com/documents/aaj/1979/PDF/AAJ_1979_22_1_345.pdf

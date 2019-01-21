@@ -288,7 +288,7 @@ foo
 
 #f
 
-(atom? x) => #t
+(null? ()) => #t
 ```
 
 --
@@ -327,7 +327,7 @@ foo
 
 ```
 (cond 
-    ((atom? (quote (a b c))) 10) 
+    ((null? (quote (a b c))) 10) 
     (#t 20))
 
 => 20
@@ -336,20 +336,20 @@ foo
 --
 
 ```
-(equal a b)
+(equal? a b)
 ```
 
 --
 
 ```
-(label square (lambda (x) (* x x )))
+(define square (lambda (x) (* x x )))
 ```
 
 --
 
 ```
-(label fac (lambda (n)
-  (cond ((equal n 0) 1)
+(define fac (lambda (n)
+  (cond ((equal? n 0) 1)
         (#t (* n (fac (- n 1)))))))
 ```
 

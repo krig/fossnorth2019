@@ -400,7 +400,7 @@ skills. Parallel - nomadic life style - survival in harsh climates.
 --
 
 ```
-mmmfmmmf
+ffmmmfmmmf
 494 Adam Kristoffersson, född i Ångermannabyn, Åsele,
     död 1721-12-18 i Noret, Åsele. Skattlapp klockare nybyggare
     i Noret, Åsele. Tog upp Noret 1690.

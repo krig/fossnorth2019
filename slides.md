@@ -19,6 +19,14 @@ far. Hopefully it will be entertaining at least.
 
 ---
 
+# me
+
+---
+
+<img src="img/suse.svg" class="plain">
+
+---
+
 # 1955 - 58
 
 Note:

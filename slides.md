@@ -238,7 +238,7 @@ https://creativecommons.org/licenses/by/2.0/
 
 ## (s-expressions)
 
---
+---
 
 > To prevent reading from continuing indefinitely, each packet should
 > end with STOP followed by a large number of right parentheses. An
@@ -247,7 +247,7 @@ https://creativecommons.org/licenses/by/2.0/
 
 <small>&mdash; LISP 1.5 Programmers Manual</small>
 
---
+---
 
 ```
 foo

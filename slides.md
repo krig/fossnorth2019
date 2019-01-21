@@ -238,7 +238,7 @@ https://creativecommons.org/licenses/by/2.0/
 
 ## (s-expressions)
 
----
+--
 
 > To prevent reading from continuing indefinitely, each packet should
 > end with STOP followed by a large number of right parentheses. An
@@ -247,7 +247,7 @@ https://creativecommons.org/licenses/by/2.0/
 
 <small>&mdash; LISP 1.5 Programmers Manual</small>
 
----
+--
 
 ```
 foo
@@ -257,31 +257,31 @@ foo
 ()
 ```
 
----
+--
 
 <!-- .slide: data-background-color="#ffffff" -->
 
 <img src="img/first-slide.png" class="plain">
 
----
+--
 
 ```
 ((a b c) (d e f))
 ```
 
----
+--
 
 <!-- .slide: data-background-color="#ffffff" -->
 
 <img src="img/second-slide.png" class="plain">
 
----
+--
 
 ```
 (f x)
 ```
 
----
+--
 
 ```
 #t
@@ -291,7 +291,7 @@ foo
 (atom? x) => #t
 ```
 
----
+--
 
 ```
 (quote a) => a
@@ -301,7 +301,7 @@ foo
 '(a b c) => (a b c)
 ```
 
----
+--
 
 ```
 (cons x '(y)) => (x y)
@@ -311,19 +311,19 @@ foo
 (cdr (cons x y)) => y
 ```
 
----
+--
 
 ```
 (lambda (x) (* x 2))
 ```
 
----
+--
 
 ```
 ((lambda (x) (* x 2)) 4)
 ```
 
----
+--
 
 ```
 (cond 
@@ -333,19 +333,19 @@ foo
 => 20
 ```
 
----
+--
 
 ```
 (equal a b)
 ```
 
----
+--
 
 ```
 (label square (lambda (x) (* x x )))
 ```
 
----
+--
 
 ```
 (label fac (lambda (n)
@@ -396,6 +396,18 @@ Note:
 Reinventing the wheel is good - refining tools and processes - make
 the wheel as small as possible. Iterate and hone tools and
 skills. Parallel - nomadic life style - survival in harsh climates.
+
+--
+
+```
+mmmfmmmf
+494 Adam Kristoffersson, född i Ångermannabyn, Åsele,
+    död 1721-12-18 i Noret, Åsele. Skattlapp klockare nybyggare
+    i Noret, Åsele. Tog upp Noret 1690.
+    
+    Tillhörde en av lappojkarna som med tvång togs till 
+    skolan i Lycksele trots föräldrarnas protester.
+```
 
 ---
 

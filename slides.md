@@ -421,7 +421,7 @@ ffmmmfmmmf
 
 ---
 
-* ~560 lines of C
+* &lt; 500 lines of C
 * Copying garbage collector
 * Implementation of LISP 1.5 eval
 

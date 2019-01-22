@@ -293,9 +293,8 @@ called S expressions.
 
 ---
 
-<!-- .slide: data-background-color="#000000" -->
 
-<img src="img/lambda.jpg" class="plain">
+<img src="img/lambda.png" class="plain">
 
 Note:
 

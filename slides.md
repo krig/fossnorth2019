@@ -2,6 +2,24 @@
 
 ---
 
+<img src="img/keyboard-twocats.png" class="plain">
+
+Note:
+
+About me: Work from home in Sweden, four cats.
+This is my third LCA, love it.
+
+---
+
+<img src="img/suse.svg" class="plain">
+
+Note:
+
+Thanks to SUSE for making it possible for me to be here.
+All views expressed are mine and not my employers.
+
+---
+
 Recursive Functions of Symbolic Expressions and Their Computation by
 Machine, Part I
 
@@ -16,14 +34,6 @@ Note:
 Papers we love. This talk is going to be a historical deep dive,
 followed by way too many slides covered in source code. If we get that
 far. Hopefully it will be entertaining at least.
-
----
-
-# me
-
----
-
-<img src="img/suse.svg" class="plain">
 
 ---
 
@@ -60,6 +70,31 @@ months was won 3-1 by the Soviet program.
 
 <small>&mdash; John McCarthy, 2006</small>
 
+Note:
+
+AI Winter, interesting to see that not only have AI had a comeback,
+but there are also hints that there may be another AI winter coming.
+
+--
+
+<!-- .slide: data-background-color="#ffffff" -->
+
+<img src="img/skanska.png" style="max-height: 500px" class="plain">
+
+Note:
+
+Carbon emissions reduced by 98%, autonomous quarry.
+
+--
+
+<!-- .slide: data-background-color="#ffffff" -->
+
+<img src="img/waymo.png" style="max-height: 500px" class="plain">
+
+Note:
+
+Starting to see push back on general self-driving cars
+
 ---
 
 - 1956 - IPL 2
@@ -80,6 +115,10 @@ Fortran: First higher-level language
 <img src="img/ibm-704.jpg" style="max-height: 500px">
 
 Note:
+
+The AI lab had access to a IBM 704 computer so that is the computer
+they used. Consisted of basically three fridges: A punch card reader,
+a processor and a printer.
 
 Source: https://commons.wikimedia.org/wiki/File:IBM_Electronic_Data_Processing_Machine_-_GPN-2000-001881.jpg
 
@@ -191,6 +230,10 @@ https://youtu.be/uFQ3sajIdaM
 
 <small>&mdash; John McCarthy</small>
 
+Note:
+
+Love this quote, expresses such confidence
+
 ---
 
 <!-- .slide: data-background-image="img/doing-it-wrong.jpg" data-background-color="#000000" data-background-size="contain" -->
@@ -241,7 +284,26 @@ https://creativecommons.org/licenses/by/2.0/
 
 ---
 
-## (s-expressions)
+## (s expressions)
+
+Note:
+
+OK so at this point I should introduce the actual syntax of lisp,
+called S expressions.
+
+---
+
+<!-- .slide: data-background-color="#000000" -->
+
+<img src="img/lambda.jpg" class="plain">
+
+Note:
+
+S expressions were based on something called the lambda calculus
+invented in the 1930s by Alonzo Church, and it's a mathematical
+notation for expressing computation based on function
+application. Basically, the idea is that all computations can be
+expressed as function application.
 
 ---
 
@@ -251,6 +313,19 @@ https://creativecommons.org/licenses/by/2.0/
 > reading.
 
 <small>&mdash; LISP 1.5 Programmers Manual</small>
+
+Note:
+
+The most immediate feature of S expressions is the abundance of
+parentheses. There is no getting away from that: There are a lot of
+parentheses and keeping track of them is a pain. So it is absolutely
+essential to have an editor which helps you manage them by
+highlighting pairs and so on.
+
+Of course back then they didn't have editors, they had punch cards. So
+the advice given in the LISP manual was to add an extra punch card at
+the end of each batch that has a bunch of closing parens, just to make
+sure that things don't keep going forever.
 
 ---
 
@@ -374,6 +449,21 @@ foo
 
 ---
 
+## CODE = DATA
+
+Note:
+
+One thing that Lisp revealed is that code and data at its root are the
+same thing. There is no sharp boundary between the two, even though we
+like to pretend there is.
+
+Lisp is really good for things that are both code and data. XML for
+example is OK for data, but terrible for code - see rule expressions
+or if/else statements encoded in XML - I really wish there was more
+lisp / s expression usage out there.
+
+---
+
 ### Lisp Today
 
 Note:
@@ -381,9 +471,11 @@ Note:
 Scheme, Common Lisp, Emacs Lisp, Clojure, Clojurescript
 GC/VM: Java, Javascript, Perl, Ruby, Python
 
+Carp, clasp, GNU guix.
+
 ---
 
-### Lisp & Linux
+### Roots
 
 Note:
 
@@ -391,20 +483,18 @@ Why open source is important: Unbroken connection to the past.
 Wisdom and craft. Culture.
 Lisp: First time source code mattered beyond the machine - easily
 portable, flexible - so small that it fits on a piece of paper.
-
----
-
-### Reinventing the Wheel
-
-Note:
-
-Reinventing the wheel is good - refining tools and processes - make
-the wheel as small as possible. Iterate and hone tools and
-skills. Parallel - nomadic life style - survival in harsh climates.
+Garbage collection, virtual machines, programs that write programs,
+portability - all started with lisp.
+Earlier talk mentioned value of learning assembler to really
+understand how things work - learning lisp reveals how computing
+really works, not physically but as a mathematical process.
 
 --
 
-```
+<img src="img/trumma.jpg" style="max-height:500px;" >
+
+Note:
+
 ffmmmfmmmf
 494 Adam Kristoffersson, född i Ångermannabyn, Åsele,
     död 1721-12-18 i Noret, Åsele. Skattlapp klockare nybyggare
@@ -412,7 +502,6 @@ ffmmmfmmmf
     
     Tillhörde en av lappojkarna som med tvång togs till 
     skolan i Lycksele trots föräldrarnas protester.
-```
 
 ---
 

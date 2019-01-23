@@ -439,11 +439,21 @@ foo
 (cdr (cons x y)) => y
 ```
 
+Note:
+
+Cons = short for construct
+CAR = Contents of the Address part of Register
+CDR = Contents of the Decrement part of Register
+
 --
 
 ```
 (lambda (x) (* x 2))
 ```
+
+Note:
+
+Lambda represents a function, from the lambda calculus
 
 --
 
@@ -717,7 +727,7 @@ void gc_copy(object **root) {
 		return;
 	if ((*root)->car == &fwdmarker) {
 		*root = (*root)->cdr;
-	} else if (*root < fromspace || *root >= (fromspace + HEAPSIZE)) {
+	} else {
 		object *p = allocptr++;
 		memcpy(p, *root, sizeof(object));
 		(*root)->car = &fwdmarker;
@@ -852,23 +862,7 @@ void lisp_print(object *obj) {
 		printf("()");
 	} else if (obj->tag == T_ATOM) {
 		printf("%s", TEXT(obj));
-	} else if (obj->tag == T_CFUNC) {
-		printf("<C@%p>", (void *)obj);
-	} else if (obj->tag == T_LAMBDA) {
-		printf("<lambda ");
-		lisp_print(obj->car);
-		printf(">");
 	} else if (obj->tag == T_CONS) {
-      /* next slide ... */
-	}
-}
-</code>
-</pre>
-
---
-
-<pre class="stretch">
-<code data-trim class="hljs">
 		printf("(");
 		for (;;) {
 			lisp_print(obj->car);
@@ -878,6 +872,8 @@ void lisp_print(object *obj) {
 			obj = obj->cdr;
 		}
 		printf(")");
+	}
+}
 </code>
 </pre>
 

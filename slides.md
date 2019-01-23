@@ -9,6 +9,26 @@ Note:
 About me: Work from home in Sweden, four cats.
 This is my third LCA, love it.
 
+--
+
+<img src="img/alltheway.png" style="max-height:500px;">
+
+Note:
+
+Packages all the way down, LCA 2017
+
+--
+
+<img src="img/vermin.png" style="max-height:500px;">
+
+Note:
+
+Everyone gets a pony, LCA 2018
+
+--
+
+<img src="img/pony.png" style="max-height:500px;">
+
 ---
 
 <img src="img/chameleon.svg" class="plain" style="max-height:500px;">
@@ -32,8 +52,12 @@ Cambridge, Mass.</small>
 Note:
 
 Papers we love. This talk is going to be a historical deep dive,
-followed by way too many slides covered in source code. If we get that
-far. Hopefully it will be entertaining at least.
+with a lot of side tracks and diversions. It's not going to be a Lisp
+tutorial, although I hope I'll have time to show you a bit about how
+to write your own Lisp. Hopefully it will be entertaining.
+Started with me reading this paper and deciding to write my own Lisp
+interpreter. Have written at least four different interpreters and
+various bits of compilers and virtual machines now.
 
 ---
 
@@ -42,6 +66,8 @@ far. Hopefully it will be entertaining at least.
 Note:
 
 MIT AI lab started ~1955 by Marvin Minsky and John McCarthy.
+McCarthy coined the term "Artificial Intelligence".
+Background in logic and math.
 
 ---
 
@@ -49,13 +75,12 @@ MIT AI lab started ~1955 by Marvin Minsky and John McCarthy.
 
 Note:
 
-Source: Courtesy of Stanford University
+Computer chess game against the Soviet union, in 1967. The Soviets won
+3-1.
+McCarthys parents were communists, he spoke russian and got his
+passion for math from russian language books his parents had.
 
-John McCarthy used an improved version of the Kotok program to play
-correspondence chess against a Soviet program developed at the Moscow
-Institute for Theoretical and Experimental Physics (ITEP) by George
-Adelson-Velsky and others. In 1967, a four-game match played over nine
-months was won 3-1 by the Soviet program.
+Source: Courtesy of Stanford University
 
 ---
 
@@ -63,6 +88,12 @@ months was won 3-1 by the Soviet program.
 > experience as effectively as humans do.
 
 <small>&mdash; John McCarthy</small>
+
+Note:
+
+Big aspirations: Making computers that think and learn. Felt that
+human-level AI was very close. Big question was how to represent
+knowledge in machines.
 
 ---
 
@@ -72,8 +103,9 @@ months was won 3-1 by the Soviet program.
 
 Note:
 
-AI Winter, interesting to see that not only have AI had a comeback,
-but there are also hints that there may be another AI winter coming.
+AI Winter, turns out AI is a lot harder than expected.
+Actually AI still seems to be surprisingly hard. Self-driving cars
+is still not quite there. Second AI winter coming?
 
 --
 
@@ -83,6 +115,7 @@ but there are also hints that there may be another AI winter coming.
 
 Note:
 
+Volvo and Skanska:
 Carbon emissions reduced by 98%, autonomous quarry.
 
 --
@@ -93,7 +126,8 @@ Carbon emissions reduced by 98%, autonomous quarry.
 
 Note:
 
-Starting to see push back on general self-driving cars
+Waymo, Google self driving car project, widely seen as being the most
+promising self-driving car project at the moment...
 
 ---
 

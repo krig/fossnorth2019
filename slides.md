@@ -11,12 +11,12 @@ This is my third LCA, love it.
 
 ---
 
-<img src="img/suse.svg" class="plain">
+<img src="img/chameleon.svg" class="plain" style="max-height:500px;">
 
 Note:
 
-Thanks to SUSE for making it possible for me to be here.
-All views expressed are mine and not my employers.
+I work for SUSE, thanks to SUSE for making it possible for me to be
+here. All views expressed are mine and not my employers.
 
 ---
 
@@ -120,7 +120,31 @@ The AI lab had access to a IBM 704 computer so that is the computer
 they used. Consisted of basically three fridges: A punch card reader,
 a processor and a printer.
 
-Source: https://commons.wikimedia.org/wiki/File:IBM_Electronic_Data_Processing_Machine_-_GPN-2000-001881.jpg
+"It may be hard to visualize a 704 or to comprehend the place it held
+in the public imagination as the type specimen of what a computer was:
+a collection of mysterious hulking gray cabinets approachable only
+through the intercession of The Operator. In the specially built
+computer room, The Operator set switches, pushed buttons, and examined
+panels of flashing lights, while [..] Assistants attended various
+whirring, clanking, and chattering devices, rushing to and fro with
+stacks of cryptically-printed paper, decks of weirdly-punched cards,
+and reels of [..] brown ribbon, all to the background hum of The
+Machine. Add a little incense and a few candles, and you could be
+forgiven for thinking these were the rites of some oracular shrine."
+
+Image source:
+https://commons.wikimedia.org/wiki/File:IBM_Electronic_Data_Processing_Machine_-_GPN-2000-001881.jpg 
+Quote source:
+https://www.masswerk.at/spacewar/SpacewarOrigin.html
+
+--
+
+<iframe width="720" height="405"
+src="https://www.youtube.com/embed/uFQ3sajIdaM" frameborder="0"
+allow="accelerometer; autoplay; encrypted-media; gyroscope;
+picture-in-picture" allowfullscreen></iframe>
+
+https://youtu.be/uFQ3sajIdaM
 
 --
 
@@ -214,15 +238,6 @@ called HEMP (High Efficiency Matrix Package).
 
 ---
 
-<iframe width="720" height="405"
-src="https://www.youtube.com/embed/uFQ3sajIdaM" frameborder="0"
-allow="accelerometer; autoplay; encrypted-media; gyroscope;
-picture-in-picture" allowfullscreen></iframe>
-
-https://youtu.be/uFQ3sajIdaM
-
----
-
 > Representing sentences by list structure seemed appropriate - <b>it
 > still is</b> - and a list processing language also seemed appropriate
 > for programming the operations involved in deduction - <b>and still
@@ -264,11 +279,11 @@ https://xach.livejournal.com/170311.html
 
 ---
 
-<img src="img/steve-russell.jpg" style="max-height:500px;" class="plain">
-
-<small>Photo by <a href="https://creativecommons.org/licenses/by/2.0/">Joi Ito</a></small>
+<img src="img/spacewar.jpg" style="max-height:500px;" >
 
 Note:
+
+Source: https://www.masswerk.at/spacewar/SpacewarOrigin.html
 Photo by Joi Ito
 https://creativecommons.org/licenses/by/2.0/
 
@@ -474,7 +489,7 @@ Carp, clasp, GNU guix.
 
 ---
 
-### Roots
+### Why Lisp?
 
 Note:
 
@@ -490,9 +505,45 @@ really works, not physically but as a mathematical process.
 
 --
 
+### Why Free Software??
+
+Note:
+
+Richard Stallman came up with Free Software to defend the old ways
+from the new thing: Proprietary software. Free software was not a new
+invention. It is the unbroken lineage that goes back to the first Lisp
+interpreter and continues in Linux today, of a culture building on
+itself. It is proprietary software that breaks that lineage. That, I
+think, is one reason why Lisp is relevant to us - it is the legacy
+that we carry.
+
+--
+
+<!-- .slide: data-background-image="img/cold.jpg" -->
+
+Note:
+
+Anecdote: In the northern part of Sweden, Norway, Finland and Russia
+there is a nation called Sapmi, and a people called the Sami. The last
+indiginous people of Europe.
+Nomadic people, lifestyle and beliefs carry practices that go back to
+the end of the ice age. Harmony with nature. Sustainable practices
+with limited resources. Survival in extremely harsh conditions.
+
+--
+
+<img src="img/weather.jpg" style="max-height:550px;" >
+
+--
+
 <img src="img/trumma.jpg" style="max-height:500px;" >
 
 Note:
+
+Little is known about the use of these drums - they were all burned,
+stolen or hidden in the 17th and 18th centuries when the Swedish
+government discovered silver in the mountains of the north and started
+an internal colonisation process.
 
 ffmmmfmmmf
 494 Adam Kristoffersson, född i Ångermannabyn, Åsele,
@@ -504,25 +555,73 @@ ffmmmfmmmf
 
 ---
 
-#### This is not the greatest lisp in the world.
-
-#### This is just a tribute.
-
----
-
-<a href="https://github.com/krig/LISP">github.com/krig/lisp</a>
-
----
+### <a href="https://github.com/krig/LISP">github.com/krig/lisp</a>
 
 * &lt; 500 lines of C
+* Interpreter
 * Copying garbage collector
-* Implementation of LISP 1.5 eval
+* LISP 1.5 eval written in lisp
 
 ---
 
-### 1. Allocation
+<img src="img/repl-diagram.svg" class="plain" style="max-height:500px;" >
 
 ---
+
+### ALLOC / GC
+
+--
+
+A Nonrecursive List Compacting Algorithm
+
+<small>C.J. Cheney, 1970</small>
+
+--
+
+<!-- .slide: data-transition="none" -->
+
+<img src="img/gc-spaces.svg" class="plain" style="max-height:500px;">
+
+--
+
+<!-- .slide: data-transition="none" -->
+
+<img src="img/gc-alloc-1.svg" class="plain" style="max-height:500px;">
+
+--
+
+<!-- .slide: data-transition="none" -->
+
+<img src="img/gc-alloc-2.svg" class="plain" style="max-height:500px;">
+
+--
+
+<!-- .slide: data-transition="none" -->
+
+<img src="img/gc-alloc-3.svg" class="plain" style="max-height:500px;">
+
+--
+
+### `collect`
+
+1. Swap `curr` and `next` spaces
+1. For each *root*;
+   1. **Copy** object pointed to by root to `curr`
+2. For each cons cell in `curr`:
+   1. **Copy** object pointed to by `car` to `curr`
+   2. **Copy** object pointed to by `cdr` to `curr`
+
+--
+
+### `copy`
+
+1. If object is a *forward pointer*;
+   1. Update pointer to object to target of *forward pointer*
+2. Else;
+   2. Copy object to `curr`
+   3. Replace object in `next` with *forward pointer*
+
+--
 
 ```
 typedef enum { T_CONS, T_ATOM, T_CFUNC, T_LAMBDA } object_tag;
@@ -536,15 +635,10 @@ typedef struct object_t {
 } object;
 ```
 
----
+--
 
-#### A Nonrecursive List Compacting Algorithm
-
-<small>C.J. Cheney, 1970</small>
-
----
-
-```
+<pre class="stretch">
+<code data-trim class="hljs">
 object *gc_alloc(object_tag tag, object *car, object *cdr) {
 	if (allocptr + 1 > fromspace + HEAPSIZE)
 		gc_collect();
@@ -555,11 +649,13 @@ object *gc_alloc(object_tag tag, object *car, object *cdr) {
 	allocptr->cdr = cdr;
 	return allocptr++;
 }
-```
+</code>
+</pre>
 
----
+--
 
-```
+<pre class="stretch">
+<code data-trim class="hljs">
 void gc_collect(void) {
 	object *tmp = fromspace;
 	fromspace = tospace;
@@ -575,11 +671,13 @@ void gc_collect(void) {
 			gc_copy(&(scanptr->cdr));
 		}
 }
-```
+</code>
+</pre>
 
----
+--
 
-```
+<pre class="stretch">
+<code data-trim class="hljs">
 void gc_copy(object **root) {
 	if (*root == NULL)
 		return;
@@ -593,11 +691,13 @@ void gc_copy(object **root) {
 		*root = p;
 	}
 }
-```
+</code>
+</pre>
 
----
+--
 
-```
+<pre class="stretch">
+<code data-trim class="hljs">
 void gc_protect(object **r, ...) {
 	rootstack[roottop++] = numroots;
 	va_list args;
@@ -612,15 +712,37 @@ void gc_protect(object **r, ...) {
 void gc_pop(void) {
 	numroots = rootstack[--roottop];
 }
-```
+</code>
+</pre>
 
 ---
 
-### 2. Read
+### READ
 
----
+--
 
-```
+### `read_obj`
+
+1. Read a *token* from input.
+2. If *token* is a `(`;
+   1. Read a list from input.
+3. Return an atom.
+
+--
+
+### `read_list`
+
+1. Peek at next *token*.
+2. If *token* is a `)`;
+  1. Read *token* from input.
+  2. Return list.
+3. Call `read_obj` and add result to list.
+4. Go to 1.
+
+--
+
+<pre class="stretch">
+<code data-trim class="hljs">
 object *lisp_read(FILE *in) {
 	const char *tok = read_token(in);
 	if (tok == NULL)
@@ -630,11 +752,13 @@ object *lisp_read(FILE *in) {
 	fprintf(stderr, "Error: Unexpected )\n");
 	return NULL;
 }
-```
+</code>
+</pre>
 
----
+--
 
-```
+<pre class="stretch">
+<code data-trim class="hljs">
 const char *read_token(FILE *in) {
 	int n = 0;
 	while (isspace(token_peek))
@@ -650,20 +774,24 @@ const char *read_token(FILE *in) {
 	token_text[n] = '\0';
 	return intern_string(token_text);
 }
-```
+</code>
+</pre>
 
----
+--
 
-```
+<pre class="stretch">
+<code data-trim class="hljs">
 object *lisp_read_obj(const char *tok, FILE *in) {
 	return (tok[0] != '(') ? new_atom(tok) :
 		lisp_read_list(read_token(in), in);
 }
-```
+</code>
+</pre>
 
----
+--
 
-```
+<pre class="stretch">
+<code data-trim class="hljs">
 object *lisp_read_list(const char *tok, FILE *in) {
 	if (tok[0] == ')')
 		return NULL;
@@ -674,15 +802,17 @@ object *lisp_read_list(const char *tok, FILE *in) {
 	obj2 = new_cons(obj, tmp);
 	return obj2;
 }
-```
+</code>
+</pre>
 
 ---
 
-### 3. Print
+### PRINT
 
----
+--
 
-```
+<pre class="stretch">
+<code data-trim class="hljs">
 void lisp_print(object *obj) {
 	if (obj == NULL) {
 		printf("()");
@@ -698,11 +828,13 @@ void lisp_print(object *obj) {
       /* next slide ... */
 	}
 }
-```
+</code>
+</pre>
 
----
+--
 
-```
+<pre class="stretch">
+<code data-trim class="hljs">
 		printf("(");
 		for (;;) {
 			lisp_print(obj->car);
@@ -712,15 +844,17 @@ void lisp_print(object *obj) {
 			obj = obj->cdr;
 		}
 		printf(")");
-```
+</code>
+</pre>
 
 ---
 
-### 4. Eval
+### EVAL
 
----
+--
 
-```
+<pre class="stretch">
+<code data-trim class="hljs">
 object *lisp_eval(object *expr, object *env) {
 restart:
 	if (expr == NULL)
@@ -733,11 +867,13 @@ restart:
 		return expr;
     
     ...
-```
+</code>
+</pre>
 
----
+--
 
-```
+<pre class="stretch">
+<code data-trim class="hljs">
 	if (expr == NULL)
 		return expr;
 	if (expr->tag == T_ATOM && match_number(TEXT(expr)))
@@ -746,21 +882,25 @@ restart:
 		return env_lookup(expr, env);
 	if (expr->tag != T_CONS)
 		return expr;
-```
+</code>
+</pre>
 
----
+--
 
-```
+<pre class="stretch">
+<code data-trim class="hljs">
 	object *head = expr->car;
 
     if (TEXT(head) == TQUOTE) {
 		return expr->cdr->car;
 	} else if (TEXT(head) == TCOND) {
-```
+</code>
+</pre>
 
----
+--
 
-```
+<pre class="stretch">
+<code data-trim class="hljs">
 	} else if (TEXT(head) == TCOND) {
 		object *item = NULL, *cond = NULL;
 		for (item = expr->cdr; item != NULL; item = item->cdr) {
@@ -772,11 +912,13 @@ restart:
 		}
 		abort();
 	} else if (TEXT(head) == TDEFINE) {
-```
+</code>
+</pre>
 
----
+--
 
-```
+<pre class="stretch">
+<code data-trim class="hljs">
 	} else if (TEXT(head) == TDEFINE) {
 		object *name = NULL;
 		object *value = NULL;
@@ -785,9 +927,10 @@ restart:
 		env_set(env, name, value);
 		return value;
 	} else if (TEXT(head) == TLAMBDA) {
-```
+</code>
+</pre>
 
----
+--
 
 ```
 	} else if (TEXT(head) == TLAMBDA) {
@@ -796,7 +939,7 @@ restart:
 	}
 ```
 
----
+--
 
 ```
 	object *fn = NULL, *args = NULL, *params = NULL, *param = NULL;
@@ -804,7 +947,7 @@ restart:
 	if (fn->tag == T_CFUNC) {
 ```
 
----
+--
 
 ```
 	if (fn->tag == T_CFUNC) {
@@ -817,7 +960,7 @@ restart:
 	} else if (fn->tag == T_LAMBDA) {
 ```
 
----
+--
 
 ```
 	} else if (fn->tag == T_LAMBDA) {
@@ -830,7 +973,7 @@ restart:
 		}
 ```
 
----
+--
 
 ```
         
@@ -845,7 +988,7 @@ restart:
 	}
 ```
 
----
+--
 
 ```
 	for (;;) {

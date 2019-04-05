@@ -10,20 +10,20 @@
 
 ---
 
-<img src="img/keyboard-twocats.png" class="plain">
-
-Note:
-
-About me: Work from home in Sweden, four cats.
-
----
-
 <img src="img/chameleon.svg" class="plain" style="max-height:500px;">
 
 Note:
 
 I work for SUSE, thanks to SUSE for making it possible for me to be
 here. All views expressed are mine and not my employers.
+
+---
+
+<img src="img/keyboard-twocats.png" class="plain">
+
+Note:
+
+About me: Work from home in Sweden, four cats.
 
 ---
 
@@ -179,9 +179,9 @@ Sweden, called BARK.
 
 Source: https://twitter.com/emnland/status/984120618441469952
 
---
+---
 
-<img src="img/vera2.jpg" style="max-height: 500px">
+<!-- .slide: data-background-image="img/vera2.jpg" data-background-color="#ffffff" data-background-size="contain" -->
 
 Note:
 
@@ -214,9 +214,7 @@ https://creativecommons.org/licenses/by-sa/3.0/deed.en
 
 ---
 
-<img src="img/fox.jpg" style="max-height: 500px">
-
-Dr. Phyllis Fox
+<!-- .slide: data-background-image="img/fox.jpg" data-background-color="#ffffff" data-background-size="contain" -->
 
 Note:
 
@@ -260,7 +258,7 @@ The door opened, and some high powered person came in with three men. They were 
 
 --
 
-<img src="img/fox2.png" style="max-height: 500px">
+<img src="img/fox2.png" style="max-height: 550px">
 
 Note:
 
@@ -296,6 +294,12 @@ https://xach.livejournal.com/170311.html
 > machine.
 
 <small>&mdash; John McCarthy</small>
+
+Note:
+
+At this point, Lisp was a model for computation. It became a
+programming language when McCarthy decided to improve the
+Turing machine.
 
 ---
 
@@ -418,10 +422,6 @@ With recursive functions, you can express anything. Naming makes it easier to ma
 
 ---
 
-<!-- .slide: data-background-image="img/evalquote.png" data-background-color="#ffffff" data-background-size="contain" -->
-
----
-
 > Yes, that was the big revelation to me when I was in graduate
 > school—when I finally understood that the half page of code on the
 > bottom of page 13 of the Lisp 1.5 manual was Lisp in itself. These
@@ -429,6 +429,10 @@ With recursive functions, you can express anything. Naming makes it easier to ma
 > programming in a few lines that I can put my hand over.
 
 <small>&mdash; Alan Kay</small>
+
+---
+
+<!-- .slide: data-background-image="img/evalquote.png" data-background-color="#ffffff" data-background-size="contain" -->
 
 ---
 
@@ -823,61 +827,64 @@ restart:
 --
 
 ```
-     object *fn = NULL, *args = NULL, *params = NULL, *param = NULL;
-     fn = lisp_eval(head, env);
-     if (fn->tag == T_CFUNC) {
+object *fn = NULL, *args = NULL, *params = NULL, *param = NULL;
+fn = lisp_eval(head, env);
+if (fn->tag == T_CFUNC) {
 ```
 
 --
 
 ```
-	if (fn->tag == T_CFUNC) {
-		for (params = expr->cdr; params != NULL; params = params->cdr) {
-			param = lisp_eval(params->car, env);
-			args = new_cons(param, args);
-		}
-		object *ret = ((cfunc)fn->car)(list_reverse(args));
-		return ret;
-	} else if (fn->tag == T_LAMBDA) {
+if (fn->tag == T_CFUNC) {
+    for (params = expr->cdr; 
+         params != NULL;
+         params = params->cdr) {
+        param = lisp_eval(params->car, env);
+        args = new_cons(param, args);
+    }
+    object *ret = ((cfunc)fn->car)(list_reverse(args));
+    return ret;
+} else if (fn->tag == T_LAMBDA) {
 ```
 
 --
 
 ```
-	} else if (fn->tag == T_LAMBDA) {
-		object *callenv = new_env(env);
-		args = fn->car;
-		object *item = NULL;
-		for (params = expr->cdr; params != NULL; params = params->cdr, args = args->cdr) {
-			param = lisp_eval(params->car, env);
-			env_set(callenv, args->car, param);
-		}
+} else if (fn->tag == T_LAMBDA) {
+    object *callenv = new_env(env);
+    args = fn->car;
+    object *item = NULL;
+    for (params = expr->cdr;
+         params != NULL;
+         params = params->cdr, args = args->cdr) {
+        param = lisp_eval(params->car, env);
+        env_set(callenv, args->car, param);
+    }
+```
+
+--
+
+```    
+    for (item = fn->cdr; item != NULL; item = item->cdr) {
+        if (item->cdr == NULL) {
+            expr = item->car;
+            env = callenv;
+            goto restart;
+        }
+        lisp_eval(item->car, callenv);
+    }
+}
 ```
 
 --
 
 ```
-        
-		for (item = fn->cdr; item != NULL; item = item->cdr) {
-			if (item->cdr == NULL) {
-				expr = item->car;
-				env = callenv;
-				goto restart;
-			}
-			lisp_eval(item->car, callenv);
-		}
-	}
-```
-
---
-
-```
-	for (;;) {
-		obj = lisp_read(in);
-		obj = lisp_eval(obj, env);
-		lisp_print(obj);
-		printf("\n");
-	}
+    for (;;) {
+        obj = lisp_read(in);
+        obj = lisp_eval(obj, env);
+        lisp_print(obj);
+        printf("\n");
+    }
 ```
 
 ---

@@ -252,23 +252,42 @@ Dr. Phyllis Fox
 Note:
 
 1958: Dr. Phyllis Fox started a human computer on the Univac together
-with Jean Jennings Bartik from the ENIAC. She then wrote the DYNAMO
+with Jean Jennings Bartik from the ENIAC, then worked on a differential 
+analyzer (pre-computer). In 1949 she worked with the Whirlwind team, 
+writing software for the machine being built. She later worked the DYNAMO
 language, which was a very early simulation language. Wrote the first
 manual for LISP and is credited as a collaborator on the first LISP
 interpreter. As far as I can tell, apart from McCarthy everyone else
 on the team were grad students, so she would have been the only one
 with experience implementing a programming language.
 
-Dynamo was used for the "Limits to Growth" simulation in 1972 which
-became very famous. 
-
-"Two of the scenarios saw "overshoot and collapse" of the global
-system by the mid- to latter-part of the 21st century, while a third
-scenario resulted in a "stabilized world"."
-
 After her time at MIT she moved to Bell Labs (birthplace of Unix),
-where she created a maths library called PORT. Also wrote a library
-called HEMP (High Efficiency Matrix Package).
+where she created a maths library called PORT.
+
+Copyright © by the Computer History Museum. Use of this the material for
+research purposes is allowed. Any such use should cite the SIAM History
+of Numerical Analysis and Scientific Computing Project
+(http://history.siam.org).
+
+---
+
+<img src="img/youtube2.png" style="max-height: 500px">
+
+Note:
+
+Thanks to the wonders of youtube comments, more details on Prof. Fox.
+
+"I would ask questions from Minsky or McCarthy, and I got it done. 
+I think it was helpful for people to have it. I guess, essentially 
+I’m a documenter. If you’re looking for it, that’s what I am." 
+
+---
+
+<img src="img/fox1.png" style="max-height: 500px">
+
+---
+
+<img src="img/fox2.png" style="max-height: 500px">
 
 ---
 
@@ -320,6 +339,10 @@ Note:
 Source: https://www.masswerk.at/spacewar/SpacewarOrigin.html
 Photo by Joi Ito
 https://creativecommons.org/licenses/by/2.0/
+
+---
+
+<img src="img/fox3.png" style="max-height: 500px">
 
 ---
 
@@ -377,67 +400,21 @@ sure that things don't keep going forever.
 
 ---
 
-```
-foo
+<!-- .slide: data-background-color="#ffffff" -->
 
-(a b c d)
+<img src="img/notes2.png" class="plain">
 
-()
-```
-
---
+---
 
 <!-- .slide: data-background-color="#ffffff" -->
 
-<img src="img/first-slide.png" class="plain">
+<img src="img/notes3.png" class="plain">
 
---
-
-```
-((a b c) (d e f))
-```
-
---
+---
 
 <!-- .slide: data-background-color="#ffffff" -->
 
-<img src="img/second-slide.png" class="plain">
-
---
-
-```
-(f x)
-```
-
---
-
-```
-#t
-
-#f
-
-(null? ()) => #t
-```
-
---
-
-```
-(quote a) => a
-
-(quote (a b c)) => (a b c)
-
-'(a b c) => (a b c)
-```
-
---
-
-```
-(cons x '(y)) => (x y)
-
-(car (cons x y)) => x
-
-(cdr (cons x y)) => y
-```
+<img src="img/notes.png" class="plain">
 
 Note:
 

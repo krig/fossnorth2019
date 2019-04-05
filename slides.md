@@ -395,7 +395,7 @@ sure that things don't keep going forever.
 
 ---
 
-<!-- .slide: data-background-image="img/notes1.png" data-background-color="#ffffff" data-background-size="contain" -->
+<!-- .slide: data-background-image="img/listmanip.png" data-background-color="#ffffff" data-background-size="contain" -->
 
 
 Note:
@@ -515,7 +515,15 @@ A Nonrecursive List Compacting Algorithm
 
 --
 
-<!-- .slide: data-background-image="img/gc1.png" data-background-color="#ffffff" data-background-size="contain" -->
+<!-- .slide: data-background-image="img/gc-impl-1.png" data-background-color="#ffffff" data-background-size="contain" -->
+
+--
+
+<!-- .slide: data-background-image="img/gc-impl-2.png" data-background-color="#ffffff" data-background-size="contain" -->
+
+--
+
+<!-- .slide: data-background-image="img/gc-impl-3.png" data-background-color="#ffffff" data-background-size="contain" -->
 
 --
 

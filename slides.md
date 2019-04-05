@@ -1,4 +1,12 @@
-<!-- .slide: data-background-image="img/front.png" data-background-color="#387a3b" -->
+# LET'S LISP LIKE IT'S 1959
+
+## VERSION II
+
+<small>
+<br><br><br>
+<code>Kristoffer Grönlund, SUSE</code><br>
+<code>kgronlund@suse.com</code>
+</small>
 
 ---
 
@@ -7,27 +15,6 @@
 Note:
 
 About me: Work from home in Sweden, four cats.
-This is my third LCA, love it.
-
---
-
-<img src="img/alltheway.png" style="max-height:500px;">
-
-Note:
-
-Packages all the way down, LCA 2017
-
---
-
-<img src="img/vermin.png" style="max-height:500px;">
-
-Note:
-
-Everyone gets a pony, LCA 2018
-
---
-
-<img src="img/pony.png" style="max-height:500px;">
 
 ---
 
@@ -245,6 +232,10 @@ https://creativecommons.org/licenses/by-sa/3.0/deed.en
 
 --
 
+<!-- .slide: data-background-image="img/annapurna-book.jpg" data-background-color="#000000" data-background-size="contain" -->
+
+---
+
 <img src="img/fox.jpg" style="max-height: 500px">
 
 Dr. Phyllis Fox
@@ -269,7 +260,7 @@ research purposes is allowed. Any such use should cite the SIAM History
 of Numerical Analysis and Scientific Computing Project
 (http://history.siam.org).
 
----
+--
 
 <img src="img/youtube2.png" style="max-height: 500px">
 
@@ -281,13 +272,21 @@ Thanks to the wonders of youtube comments, more details on Prof. Fox.
 I think it was helpful for people to have it. I guess, essentially 
 I’m a documenter. If you’re looking for it, that’s what I am." 
 
----
+--
 
 <img src="img/fox1.png" style="max-height: 500px">
 
----
+Note:
+
+The door opened, and some high powered person came in with three men. They were probably all in suits, and they looked at the analyzer. I was used to visitors, so I showed them everything. Towards the end [...], the big boss said "Now, these three gentlemen are going to work here and run this machine, and you will work for them."
+
+--
 
 <img src="img/fox2.png" style="max-height: 500px">
+
+Note:
+
+Every now and then, I'd see that I needed a certain instruction that they hadn't yet included in Whirlwind's commands. And I would tell the engineers about it. I had the timing diagrams showing the paths and timing of the electric pulses, so I knew how the machine worked and what was feasible. For example I found that it would be useful to have an instruction that would add one to the current address, AO I called it. It was essentially, I guess, a loop mechanism that I was inventing then. So they changed some of the instruction set on Whirlwind and I think they found it useful to have someone actually writing a program for it.
 
 ---
 
@@ -342,9 +341,10 @@ https://creativecommons.org/licenses/by/2.0/
 
 ---
 
-<img src="img/fox3.png" style="max-height: 500px">
+<img src="img/fox4.png" style="max-height: 500px">
 
 ---
+
 
 > Steve Russell said, look, why don't I program this eval..., and I
 > said to him, ho, ho, you're confusing theory with practice, this
@@ -400,21 +400,21 @@ sure that things don't keep going forever.
 
 ---
 
-<!-- .slide: data-background-color="#ffffff" -->
-
-<img src="img/notes2.png" class="plain">
+<img src="img/fox3.png" style="max-height: 500px">
 
 ---
 
-<!-- .slide: data-background-color="#ffffff" -->
-
-<img src="img/notes3.png" class="plain">
+<!-- .slide: data-background-image="img/notes2.png" data-background-color="#ffffff" data-background-size="contain" -->
 
 ---
 
-<!-- .slide: data-background-color="#ffffff" -->
+<!-- .slide: data-background-image="img/notes3.png" data-background-color="#ffffff" data-background-size="contain" -->
 
-<img src="img/notes.png" class="plain">
+
+---
+
+<!-- .slide: data-background-image="img/notes1.png" data-background-color="#ffffff" data-background-size="contain" -->
+
 
 Note:
 
@@ -422,51 +422,21 @@ Cons = short for construct
 CAR = Contents of the Address part of Register
 CDR = Contents of the Decrement part of Register
 
---
+---
 
-```
-(lambda (x) (* x 2))
-```
+<!-- .slide: data-background-image="img/funcalls.png" data-background-color="#ffffff" data-background-size="contain" -->
 
 Note:
 
 Lambda represents a function, from the lambda calculus
 
---
+---
 
-```
-((lambda (x) (* x 2)) 4)
-```
+<!-- .slide: data-background-image="img/recursive.png" data-background-color="#ffffff" data-background-size="contain" -->
 
---
+Note:
 
-```
-(cond 
-    ((null? (quote (a b c))) 10) 
-    (#t 20))
-
-=> 20
-```
-
---
-
-```
-(equal? a b)
-```
-
---
-
-```
-(define square (lambda (x) (* x x )))
-```
-
---
-
-```
-(define fac (lambda (n)
-  (cond ((equal? n 0) 1)
-        (#t (* n (fac (- n 1)))))))
-```
+With recursive functions, you can express anything. Naming makes it easier to make recursive functions, but you don't have to - Y combinator is the way to construct recursive functions with pure lambda calculus.
 
 ---
 
@@ -496,17 +466,6 @@ Lisp is really good for things that are both code and data. XML for
 example is OK for data, but terrible for code - see rule expressions
 or if/else statements encoded in XML - I really wish there was more
 lisp / s expression usage out there.
-
----
-
-### Lisp Today
-
-Note:
-
-Scheme, Common Lisp, Emacs Lisp, Clojure, Clojurescript
-GC/VM: Java, Javascript, Perl, Ruby, Python
-
-Carp, clasp, GNU guix.
 
 ---
 
@@ -540,23 +499,6 @@ that we carry.
 
 --
 
-<!-- .slide: data-background-image="img/cold.jpg" -->
-
-Note:
-
-Anecdote: In the northern part of Sweden, Norway, Finland and Russia
-there is a nation called Sapmi, and a people called the Sami. The last
-indiginous people of Europe.
-Nomadic people, lifestyle and beliefs carry practices that go back to
-the end of the ice age. Harmony with nature. Sustainable practices
-with limited resources. Survival in extremely harsh conditions.
-
---
-
-<img src="img/weather.jpg" style="max-height:550px;" >
-
---
-
 <img src="img/trumma.jpg" style="max-height:500px;" >
 
 Note:
@@ -565,14 +507,6 @@ Little is known about the use of these drums - they were all burned,
 stolen or hidden in the 17th and 18th centuries when the Swedish
 government discovered silver in the mountains of the north and started
 an internal colonisation process.
-
-ffmmmfmmmf
-494 Adam Kristoffersson, född i Ångermannabyn, Åsele,
-    död 1721-12-18 i Noret, Åsele. Skattlapp klockare nybyggare
-    i Noret, Åsele. Tog upp Noret 1690.
-    
-    Tillhörde en av lappojkarna som med tvång togs till 
-    skolan i Lycksele trots föräldrarnas protester.
 
 ---
 
@@ -585,11 +519,11 @@ ffmmmfmmmf
 
 ---
 
-<img src="img/repl-diagram.svg" class="plain" style="max-height:500px;" >
+<!-- .slide: data-background-image="img/gc2.png" data-background-color="#ffffff" data-background-size="contain" -->
 
 ---
 
-### ALLOC / GC
+### Let's write a garbage collector!
 
 --
 
@@ -599,27 +533,7 @@ A Nonrecursive List Compacting Algorithm
 
 --
 
-<!-- .slide: data-transition="none" -->
-
-<img src="img/gc-spaces.svg" class="plain" style="max-height:500px;">
-
---
-
-<!-- .slide: data-transition="none" -->
-
-<img src="img/gc-alloc-1.svg" class="plain" style="max-height:500px;">
-
---
-
-<!-- .slide: data-transition="none" -->
-
-<img src="img/gc-alloc-2.svg" class="plain" style="max-height:500px;">
-
---
-
-<!-- .slide: data-transition="none" -->
-
-<img src="img/gc-alloc-3.svg" class="plain" style="max-height:500px;">
+<!-- .slide: data-background-image="img/gc1.png" data-background-color="#ffffff" data-background-size="contain" -->
 
 --
 

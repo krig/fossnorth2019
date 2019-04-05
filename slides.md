@@ -94,28 +94,6 @@ AI Winter, turns out AI is a lot harder than expected.
 Actually AI still seems to be surprisingly hard. Self-driving cars
 is still not quite there. Second AI winter coming?
 
---
-
-<!-- .slide: data-background-color="#ffffff" -->
-
-<img src="img/skanska.png" style="max-height: 500px" class="plain">
-
-Note:
-
-Volvo and Skanska:
-Carbon emissions reduced by 98%, autonomous quarry.
-
---
-
-<!-- .slide: data-background-color="#ffffff" -->
-
-<img src="img/waymo.png" style="max-height: 500px" class="plain">
-
-Note:
-
-Waymo, Google self driving car project, widely seen as being the most
-promising self-driving car project at the moment...
-
 ---
 
 - 1956 - IPL 2
@@ -778,15 +756,12 @@ void lisp_print(object *obj) {
 <code data-trim class="hljs">
 object *lisp_eval(object *expr, object *env) {
 restart:
-	if (expr == NULL)
-		return expr;
-	if (expr->tag == T_ATOM && match_number(TEXT(expr)))
-		return expr;
-	if (expr->tag == T_ATOM)
-		return env_lookup(expr, env);
-	if (expr->tag != T_CONS)
-		return expr;
-    
+    if (expr == NULL)
+        return expr;
+    if (expr->tag == T_ATOM)
+        return match_number(TEXT(expr)) ?
+            expr :
+            env_lookup(expr, env);
     ...
 </code>
 </pre>
@@ -795,26 +770,11 @@ restart:
 
 <pre class="stretch">
 <code data-trim class="hljs">
-	if (expr == NULL)
-		return expr;
-	if (expr->tag == T_ATOM && match_number(TEXT(expr)))
-		return expr;
-	if (expr->tag == T_ATOM)
-		return env_lookup(expr, env);
-	if (expr->tag != T_CONS)
-		return expr;
-</code>
-</pre>
-
---
-
-<pre class="stretch">
-<code data-trim class="hljs">
-	object *head = expr->car;
+    object *head = expr->car;
 
     if (TEXT(head) == TQUOTE) {
-		return expr->cdr->car;
-	} else if (TEXT(head) == TCOND) {
+        return expr->cdr->car;
+    } else if (TEXT(head) == TCOND) {
 </code>
 </pre>
 
@@ -822,17 +782,17 @@ restart:
 
 <pre class="stretch">
 <code data-trim class="hljs">
-	} else if (TEXT(head) == TCOND) {
-		object *item = NULL, *cond = NULL;
-		for (item = expr->cdr; item != NULL; item = item->cdr) {
-			cond = item->car;
-			if (lisp_eval(cond->car, env) != NULL) {
-				expr = cond->cdr->car;
-				goto restart;
-			}
-		}
-		abort();
-	} else if (TEXT(head) == TDEFINE) {
+    } else if (TEXT(head) == TCOND) {
+        object *item = NULL, *cond = NULL;
+        for (item = expr->cdr; item != NULL; item = item->cdr) {
+            cond = item->car;
+            if (lisp_eval(cond->car, env) != NULL) {
+                expr = cond->cdr->car;
+                goto restart;
+            }
+        }
+        return NULL;
+    } else if (TEXT(head) == TDEFINE) {
 </code>
 </pre>
 
@@ -840,32 +800,32 @@ restart:
 
 <pre class="stretch">
 <code data-trim class="hljs">
-	} else if (TEXT(head) == TDEFINE) {
-		object *name = NULL;
-		object *value = NULL;
-		name = expr->cdr->car;
-		value = lisp_eval(expr->cdr->cdr->car, env);
-		env_set(env, name, value);
-		return value;
-	} else if (TEXT(head) == TLAMBDA) {
+     } else if (TEXT(head) == TDEFINE) {
+         object *name = NULL;
+         object *value = NULL;
+         name = expr->cdr->car;
+         value = lisp_eval(expr->cdr->cdr->car, env);
+         env_set(env, name, value);
+         return value;
+     } else if (TEXT(head) == TLAMBDA) {
 </code>
 </pre>
 
 --
 
 ```
-	} else if (TEXT(head) == TLAMBDA) {
-		expr->cdr->tag = T_LAMBDA;
-		return expr->cdr;
-	}
+     } else if (TEXT(head) == TLAMBDA) {
+          expr->cdr->tag = T_LAMBDA;
+         return expr->cdr;
+     }
 ```
 
 --
 
 ```
-	object *fn = NULL, *args = NULL, *params = NULL, *param = NULL;
-	fn = lisp_eval(head, env);
-	if (fn->tag == T_CFUNC) {
+     object *fn = NULL, *args = NULL, *params = NULL, *param = NULL;
+     fn = lisp_eval(head, env);
+     if (fn->tag == T_CFUNC) {
 ```
 
 --

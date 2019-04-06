@@ -348,7 +348,7 @@ called S expressions.
 ---
 
 
-<img src="img/lambda.png" class="plain">
+<!-- .slide: data-background-image="img/lambda_calculus.png" data-background-color="#ffffff" data-background-size="contain" -->
 
 Note:
 
@@ -436,7 +436,7 @@ With recursive functions, you can express anything. Naming makes it easier to ma
 
 ---
 
-## CODE = DATA
+# what is software
 
 Note:
 
@@ -764,8 +764,7 @@ void lisp_print(object *obj) {
 
 --
 
-<pre class="stretch">
-<code data-trim class="hljs">
+```
 object *lisp_eval(object *expr, object *env) {
 restart:
     if (expr == NULL)
@@ -775,25 +774,21 @@ restart:
             expr :
             env_lookup(expr, env);
     ...
-</code>
-</pre>
+```
 
 --
 
-<pre class="stretch">
-<code data-trim class="hljs">
+```
     object *head = expr->car;
 
     if (TEXT(head) == TQUOTE) {
         return expr->cdr->car;
     } else if (TEXT(head) == TCOND) {
-</code>
-</pre>
+```
 
 --
 
-<pre class="stretch">
-<code data-trim class="hljs">
+```
     } else if (TEXT(head) == TCOND) {
         object *item = NULL, *cond = NULL;
         for (item = expr->cdr; item != NULL; item = item->cdr) {
@@ -805,54 +800,52 @@ restart:
         }
         return NULL;
     } else if (TEXT(head) == TDEFINE) {
-</code>
-</pre>
-
---
-
-<pre class="stretch">
-<code data-trim class="hljs">
-     } else if (TEXT(head) == TDEFINE) {
-         object *name = NULL;
-         object *value = NULL;
-         name = expr->cdr->car;
-         value = lisp_eval(expr->cdr->cdr->car, env);
-         env_set(env, name, value);
-         return value;
-     } else if (TEXT(head) == TLAMBDA) {
-</code>
-</pre>
-
---
-
-```
-     } else if (TEXT(head) == TLAMBDA) {
-          expr->cdr->tag = T_LAMBDA;
-         return expr->cdr;
-     }
 ```
 
 --
 
 ```
-object *fn = NULL, *args = NULL, *params = NULL, *param = NULL;
-fn = lisp_eval(head, env);
-if (fn->tag == T_CFUNC) {
+    } else if (TEXT(head) == TDEFINE) {
+        object *name = NULL;
+        object *value = NULL;
+        name = expr->cdr->car;
+        value = lisp_eval(expr->cdr->cdr->car, env);
+        env_set(env, name, value);
+        return value;
+    } else if (TEXT(head) == TLAMBDA) {
 ```
 
 --
 
 ```
-if (fn->tag == T_CFUNC) {
-    for (params = expr->cdr; 
-         params != NULL;
-         params = params->cdr) {
-        param = lisp_eval(params->car, env);
-        args = new_cons(param, args);
+    } else if (TEXT(head) == TLAMBDA) {
+        expr->cdr->tag = T_LAMBDA;
+        return expr->cdr;
     }
-    object *ret = ((cfunc)fn->car)(list_reverse(args));
-    return ret;
-} else if (fn->tag == T_LAMBDA) {
+```
+
+--
+
+```
+    object *fn = NULL, *args = NULL, 
+        *params = NULL, *param = NULL;
+    fn = lisp_eval(head, env);
+    if (fn->tag == T_CFUNC) {
+```
+
+--
+
+```
+    if (fn->tag == T_CFUNC) {
+        for (params = expr->cdr; 
+            params != NULL;
+            params = params->cdr) {
+                param = lisp_eval(params->car, env);
+                args = new_cons(param, args);
+        }
+        object *ret = ((cfunc)fn->car)(list_reverse(args));
+        return ret;
+    } else if (fn->tag == T_LAMBDA) {
 ```
 
 --
@@ -884,7 +877,7 @@ if (fn->tag == T_CFUNC) {
 }
 ```
 
---
+---
 
 ```
     for (;;) {

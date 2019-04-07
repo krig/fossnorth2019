@@ -1,6 +1,6 @@
 # LET'S LISP LIKE IT'S 1959
 
-## VERSION II
+### PART II
 
 <small>
 <br><br><br>

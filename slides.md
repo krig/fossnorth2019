@@ -492,6 +492,18 @@ an internal colonisation process.
 
 ---
 
+<!-- .slide: data-background-image="img/wish.png" data-background-color="#ffffff" data-background-size="contain" -->
+
+---
+
+<!-- .slide: data-background-image="img/80s90setc.png" data-background-color="#ffffff" data-background-size="contain" -->
+
+---
+
+<!-- .slide: data-background-image="img/lisp-legacy.png" data-background-color="#ffffff" data-background-size="contain" -->
+
+---
+
 ### <a href="https://github.com/krig/LISP">github.com/krig/lisp</a>
 
 * &lt; 500 lines of C
